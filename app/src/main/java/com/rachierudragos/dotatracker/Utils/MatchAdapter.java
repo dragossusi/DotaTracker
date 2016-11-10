@@ -34,8 +34,14 @@ public class MatchAdapter extends ArrayAdapter<MatchDetail> {
         // Lookup view for data population
         TextView tv1 = (TextView) convertView.findViewById(R.id.txt_item1);
         TextView tv2 = (TextView) convertView.findViewById(R.id.txt_item2);
+        TextView tv3 = (TextView) convertView.findViewById(R.id.txt_duration);
         // Populate the data into the template view using the data object
         tv1.setText(String.valueOf(matchDetail.getMatchOverview().getMatchId()));
+        int mins = matchDetail.getDurationOfMatch()/100;
+        int secs = matchDetail.getDurationOfMatch()%100;
+        String text = (secs < 10 ? "0" : "") + secs;
+        tv3.setText(mins+":"+text);
+        ///^^^^^^^^^^^^^^^^^^ schimbat neaparat ^^^^^^^^^^^^^^^^^
         if(matchDetail.didRadianWin())
             tv2.setText("Radiant Victory");
         else

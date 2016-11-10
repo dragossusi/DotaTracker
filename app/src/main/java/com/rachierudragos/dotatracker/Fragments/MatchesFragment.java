@@ -27,10 +27,11 @@ import java.util.List;
 
 public class MatchesFragment extends Fragment {
 
-    Dota2Stats stats;
-    ListView listView;
-    Thread t;
-    ArrayList<MatchDetail> meciuri;
+    private Dota2Stats stats;
+    private ListView listView;
+    private Thread t;
+    private ArrayList<MatchDetail> meciuri;
+    private MatchAdapter adapter;
 
     @Nullable
     @Override
@@ -42,10 +43,11 @@ public class MatchesFragment extends Fragment {
         t = new Thread(new Runnable() {
             public void run() {
                 try {
-                    MatchHistory history = stats.getMatchHistory(new MatchHistoryFilter().forAccountId(110276393).forMaximumNumberOfResults(25));
+                    MatchHistory history = stats.getMatchHistory(new MatchHistoryFilter().forAccountId(110276393).forMaximumNumberOfResults(10));
                     List<MatchOverview> overviews = history.getMatchOverviews();
                     for (MatchOverview match : overviews) {
                         meciuri.add(stats.getMatchDetails(match.getMatchId()));
+                        adapter = new MatchAdapter(getActivity(),meciuri);
                     }
                 } catch (Dota2StatsAccessException e1) {
                     // Do something if an error occurs
@@ -60,7 +62,6 @@ public class MatchesFragment extends Fragment {
     public void onResume() {
         try {
             t.join();
-            MatchAdapter adapter = new MatchAdapter(getActivity(),meciuri);
             listView.setAdapter(adapter);
         } catch (InterruptedException e) {
             e.printStackTrace();
