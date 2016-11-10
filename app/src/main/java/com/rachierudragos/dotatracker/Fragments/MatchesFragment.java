@@ -9,10 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.rachierudragos.dotatracker.R;
+import com.rachierudragos.dotatracker.Utils.MatchAdapter;
 import com.rachierudragos.dotatracker.Wrapper.Dota2Stats;
 import com.rachierudragos.dotatracker.Wrapper.domain.GameMode;
 import com.rachierudragos.dotatracker.Wrapper.domain.MatchOverview;
 import com.rachierudragos.dotatracker.Wrapper.domain.filter.MatchHistoryFilter;
+import com.rachierudragos.dotatracker.Wrapper.domain.matchdetail.MatchDetail;
 import com.rachierudragos.dotatracker.Wrapper.domain.matchhistory.MatchHistory;
 import com.rachierudragos.dotatracker.Wrapper.exceptions.Dota2StatsAccessException;
 import com.rachierudragos.dotatracker.Wrapper.impl.Dota2StatsImpl;
@@ -28,8 +30,8 @@ public class MatchesFragment extends Fragment {
 
     Dota2Stats stats;
     ListView listView;
-    ArrayList<MatchOverview> meciuri;
     Thread t;
+    ArrayList<MatchDetail> meciuri;
 
     @Nullable
     @Override
@@ -43,10 +45,8 @@ public class MatchesFragment extends Fragment {
                 try {
                     MatchHistory history = stats.getMatchHistory(new MatchHistoryFilter().forAccountId(110276393).forGameMode(GameMode.All_Pick));
                     List<MatchOverview> overviews = history.getMatchOverviews();
-
                     for (MatchOverview match : overviews) {
-                        System.out.println(match.getMatchId());
-                        meciuri.add(match);
+                        meciuri.add(stats.getMatchDetails(match.getMatchId()));
                     }
                 } catch (Dota2StatsAccessException e1) {
                     // Do something if an error occurs
@@ -61,7 +61,7 @@ public class MatchesFragment extends Fragment {
     public void onResume() {
         try {
             t.join();
-
+            MatchAdapter adapter = new MatchAdapter(getActivity(),meciuri);
             //listView.setAdapter(adapter);
         } catch (InterruptedException e) {
             e.printStackTrace();
