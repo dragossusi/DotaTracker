@@ -20,8 +20,9 @@ import com.rachierudragos.dotatracker.Wrapper.Dota2Stats;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    Dota2Stats stats;
-    FragmentManager fm;
+    private Dota2Stats stats;
+    private FragmentManager fm;
+    public static final long ID = 110276393;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

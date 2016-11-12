@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.rachierudragos.dotatracker.MainActivity;
 import com.rachierudragos.dotatracker.R;
 import com.rachierudragos.dotatracker.Utils.MatchAdapter;
 import com.rachierudragos.dotatracker.Wrapper.Dota2Stats;
@@ -43,12 +44,12 @@ public class MatchesFragment extends Fragment {
         t = new Thread(new Runnable() {
             public void run() {
                 try {
-                    MatchHistory history = stats.getMatchHistory(new MatchHistoryFilter().forAccountId(110276393).forMaximumNumberOfResults(10));
+                    MatchHistory history = stats.getMatchHistory(new MatchHistoryFilter().forAccountId(MainActivity.ID).forMaximumNumberOfResults(10));
                     List<MatchOverview> overviews = history.getMatchOverviews();
                     for (MatchOverview match : overviews) {
                         meciuri.add(stats.getMatchDetails(match.getMatchId()));
-                        adapter = new MatchAdapter(getActivity(),meciuri);
                     }
+                    adapter = new MatchAdapter(getActivity(),meciuri);
                 } catch (Dota2StatsAccessException e1) {
                     // Do something if an error occurs
                 }
