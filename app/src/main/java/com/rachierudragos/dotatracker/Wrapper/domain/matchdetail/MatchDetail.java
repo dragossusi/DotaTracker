@@ -1,11 +1,12 @@
 package com.rachierudragos.dotatracker.Wrapper.domain.matchdetail;
 
-import java.util.List;
-
 import com.rachierudragos.dotatracker.Wrapper.domain.GameMode;
 import com.rachierudragos.dotatracker.Wrapper.domain.MatchOverview;
 
-public interface MatchDetail {
+import java.io.Serializable;
+import java.util.List;
+
+public interface MatchDetail extends Serializable {
 
 	public boolean didRadianWin();
 

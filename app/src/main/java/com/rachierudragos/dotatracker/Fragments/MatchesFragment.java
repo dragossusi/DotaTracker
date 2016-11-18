@@ -1,14 +1,17 @@
 package com.rachierudragos.dotatracker.Fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.rachierudragos.dotatracker.MainActivity;
+import com.rachierudragos.dotatracker.MatchListActivity;
 import com.rachierudragos.dotatracker.R;
 import com.rachierudragos.dotatracker.Utils.MatchAdapter;
 import com.rachierudragos.dotatracker.Wrapper.Dota2Stats;
@@ -67,6 +70,22 @@ public class MatchesFragment extends Fragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long arg3) {
+                System.out.println("a dat click pe item");
+                Intent intent = new Intent(getActivity(), MatchListActivity.class);
+                intent.putExtra("id", meciuri.get(position).getMatchOverview().getMatchId());
+                intent.putExtra("match",meciuri.get(position));
+                try {
+                    getActivity().startActivity(intent);
+                }
+                catch (Exception e){
+                    System.out.println("eroaree\n"+e);
+                }
+
+            }
+        });
         super.onResume();
     }
 }

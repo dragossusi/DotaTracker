@@ -7,7 +7,7 @@ package com.rachierudragos.dotatracker.Wrapper;
 public class HeroDetail {
     public static final String[] names={"antimage","axe","bane","bloodseeker","crystal_maiden","drow_ranger","earthshaker",
             "juggernaut","mirana","morphling","nevermore","phantom_lancer","puck","pudge","razor","sand_king","storm_spirit",
-            "sven","tiny","vengefulspirit","windrunner","zuus","kunkka","lina","lion","shadow_shaman","slardar","tidehunter",
+            "sven","tiny","vengefulspirit","windrunner","zuus","kunkka","","lina","lion","shadow_shaman","slardar","tidehunter",
             "witch_doctor","lich","riki","enigma","tinker","sniper","necrolyte","warlock","beastmaster","queenofpain","venomancer",
             "faceless_void","skeleton_king","death_prophet","phantom_assassin","pugna","templar_assassin","viper","luna","dragon_knight",
             "dazzle","rattletrap","leshrac","furion","life_stealer","dark_seer","clinkz","omniknight","enchantress","huskar","nightstalker",
@@ -20,6 +20,6 @@ public class HeroDetail {
     };
 
     public static String getHeroName(int id){
-        return names[id-2];
+        return names[id-1];
     }
 }

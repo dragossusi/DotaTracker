@@ -50,7 +50,6 @@ public class MatchAdapter extends ArrayAdapter<MatchDetail> {
         int id=-1;
         boolean team=true;
         List<MatchDetailPlayer> players = matchDetail.getPlayers();
-        //for(MatchDetailPlayer i : players )
         for(int i=0;i<players.size();++i)
             if (players.get(i).getAccountId() == MainActivity.ID) {
                 id = players.get(i).getHeroId();
