@@ -75,7 +75,6 @@ public class MatchesFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long arg3) {
                 System.out.println("a dat click pe item");
                 Intent intent = new Intent(getActivity(), MatchListActivity.class);
-                intent.putExtra("id", meciuri.get(position).getMatchOverview().getMatchId());
                 intent.putExtra("match",meciuri.get(position));
                 try {
                     getActivity().startActivity(intent);

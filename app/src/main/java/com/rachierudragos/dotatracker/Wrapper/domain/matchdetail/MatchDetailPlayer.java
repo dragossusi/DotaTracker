@@ -1,11 +1,12 @@
 package com.rachierudragos.dotatracker.Wrapper.domain.matchdetail;
 
-import java.util.List;
-
 import com.rachierudragos.dotatracker.Wrapper.domain.LeaverStatus;
 import com.rachierudragos.dotatracker.Wrapper.domain.MatchOverviewPlayer;
 
-public interface MatchDetailPlayer extends MatchOverviewPlayer {	
+import java.io.Serializable;
+import java.util.List;
+
+public interface MatchDetailPlayer extends MatchOverviewPlayer, Serializable {
 	
 	public List<Item> getItems();
 

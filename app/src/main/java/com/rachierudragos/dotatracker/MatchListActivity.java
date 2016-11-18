@@ -30,7 +30,6 @@ import java.util.List;
  */
 public class MatchListActivity extends AppCompatActivity {
     private MatchDetail matchDetail;
-    private long id;
     private DummyContent dummyContent;
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -60,7 +59,6 @@ public class MatchListActivity extends AppCompatActivity {
         }
         Intent intent = getIntent();
         matchDetail = (MatchDetail) intent.getSerializableExtra("match");
-        id = intent.getIntExtra("id", 0);
         dummyContent = new DummyContent(matchDetail.getPlayers());
     }
 
@@ -87,7 +85,7 @@ public class MatchListActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
-            holder.mIdView.setText(mValues.get(position).getHeroId());
+            holder.mIdView.setText(String.valueOf(mValues.get(position).getAccountId()));
             holder.mContentView.setImageResource(getResources().getIdentifier(HeroDetail.getHeroName(mValues.get(position).getHeroId()), "drawable", getPackageName()));//mValues.get(position));
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +93,7 @@ public class MatchListActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
-                        arguments.putString(MatchDetailFragment.ARG_ITEM_ID, String.valueOf(holder.mItem.getAccountId()));
+                        arguments.putSerializable("player", holder.mItem);
                         MatchDetailFragment fragment = new MatchDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction()
@@ -104,7 +102,7 @@ public class MatchListActivity extends AppCompatActivity {
                     } else {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, MatchDetailActivity.class);
-                        intent.putExtra(MatchDetailFragment.ARG_ITEM_ID, String.valueOf(holder.mItem.getAccountId()));
+                        intent.putExtra("player", holder.mItem);
                         context.startActivity(intent);
                     }
                 }
@@ -125,8 +123,8 @@ public class MatchListActivity extends AppCompatActivity {
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
-                mIdView = (TextView) view.findViewById(R.id.id);
-                mContentView = (ImageView) view.findViewById(R.id.img_hero);
+                mIdView = (TextView) view.findViewById(R.id.id_player_detail);
+                mContentView = (ImageView) view.findViewById(R.id.playerhero);
             }
             /*
             @Override

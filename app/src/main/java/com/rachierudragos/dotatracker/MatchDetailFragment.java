@@ -1,16 +1,16 @@
 package com.rachierudragos.dotatracker;
 
 import android.app.Activity;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.rachierudragos.dotatracker.Wrapper.HeroDetail;
 import com.rachierudragos.dotatracker.Wrapper.domain.matchdetail.MatchDetailPlayer;
-import com.rachierudragos.dotatracker.dummy.DummyContent;
 
 /**
  * A fragment representing a single Match detail screen.
@@ -23,7 +23,6 @@ public class MatchDetailFragment extends Fragment {
      * The fragment argument representing the item ID that this fragment
      * represents.
      */
-    public static final String ARG_ITEM_ID = "item_id";
 
     /**
      * The dummy content this fragment is presenting.
@@ -40,17 +39,16 @@ public class MatchDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
+        if (getArguments().containsKey("player")) {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            mItem = (MatchDetailPlayer) getArguments().getSerializable("player");
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(String.valueOf(mItem.getGoldPerMinute()));
+                appBarLayout.setTitle(HeroDetail.getHeroName(mItem.getHeroId()));
             }
         }
     }
@@ -62,9 +60,9 @@ public class MatchDetailFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.match_detail)).setText(mItem.getKills());
+            ((TextView) rootView.findViewById(R.id.match_detail)).setText(mItem.getKills()+"/"+mItem.getAssists()+"/"+mItem.getDeaths());
         }
-
+        System.out.println("o pornit fragmentarea");
         return rootView;
     }
 }

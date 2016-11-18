@@ -21,7 +21,7 @@ public class MatchDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_match_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
-
+        System.out.println("o pornit fragmentarea");
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -41,8 +41,8 @@ public class MatchDetailActivity extends AppCompatActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(MatchDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(MatchDetailFragment.ARG_ITEM_ID));
+            arguments.putSerializable("player",
+                    getIntent().getSerializableExtra("player"));
             MatchDetailFragment fragment = new MatchDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
