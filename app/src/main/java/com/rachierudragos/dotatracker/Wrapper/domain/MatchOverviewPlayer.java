@@ -1,8 +1,6 @@
 package com.rachierudragos.dotatracker.Wrapper.domain;
 
-import java.io.Serializable;
-
-public interface MatchOverviewPlayer extends Serializable {
+public interface MatchOverviewPlayer {
 
 	public long getAccountId();
 

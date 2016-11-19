@@ -60,7 +60,11 @@ public class MatchDetailFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.match_detail)).setText(mItem.getKills()+"/"+mItem.getAssists()+"/"+mItem.getDeaths());
+            ((TextView) rootView.findViewById(R.id.kda_detail)).setText(mItem.getKills()+"/"+mItem.getAssists()+"/"+mItem.getDeaths());
+            //((TextView) rootView.findViewById(R.id.lvl_detail)).setText(mItem.getHeroLevel());
+            //((TextView)rootView.findViewById(R.id.gpm_detail)).setText(mItem.getGoldPerMinute());
+            //((TextView)rootView.findViewById(R.id.xpm_detail)).setText(mItem.getXPPerMinute());
+            //((TextView)rootView.findViewById(R.id.net_detail)).setText(mItem.getGold());
         }
         System.out.println("o pornit fragmentarea");
         return rootView;

@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.rachierudragos.dotatracker.Wrapper.HeroDetail;
 import com.rachierudragos.dotatracker.Wrapper.domain.matchdetail.MatchDetail;
 import com.rachierudragos.dotatracker.Wrapper.domain.matchdetail.MatchDetailPlayer;
-import com.rachierudragos.dotatracker.dummy.DummyContent;
 
 import java.util.List;
 
@@ -30,7 +29,6 @@ import java.util.List;
  */
 public class MatchListActivity extends AppCompatActivity {
     private MatchDetail matchDetail;
-    private DummyContent dummyContent;
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -45,6 +43,8 @@ public class MatchListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
+        Intent intent = getIntent();
+        matchDetail = (MatchDetail) intent.getSerializableExtra("match");
 
         View recyclerView = findViewById(R.id.match_list);
         assert recyclerView != null;
@@ -57,13 +57,10 @@ public class MatchListActivity extends AppCompatActivity {
             // activity should be in two-pane mode.
             mTwoPane = true;
         }
-        Intent intent = getIntent();
-        matchDetail = (MatchDetail) intent.getSerializableExtra("match");
-        dummyContent = new DummyContent(matchDetail.getPlayers());
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(matchDetail.getPlayers()));
     }
 
     public class SimpleItemRecyclerViewAdapter
