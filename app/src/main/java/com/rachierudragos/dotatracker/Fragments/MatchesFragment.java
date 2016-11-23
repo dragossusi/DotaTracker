@@ -41,7 +41,7 @@ public class MatchesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_matches, container, false);
-        listView = (ListView)rootView.findViewById(R.id.list_lastmatches);
+        listView = (ListView) rootView.findViewById(R.id.list_lastmatches);
         stats = new Dota2StatsImpl("E1CF20517738CE047F04CC4823904781");
         meciuri = new ArrayList<>();
         t = new Thread(new Runnable() {
@@ -52,39 +52,34 @@ public class MatchesFragment extends Fragment {
                     for (MatchOverview match : overviews) {
                         meciuri.add(stats.getMatchDetails(match.getMatchId()));
                     }
-                    adapter = new MatchAdapter(getActivity(),meciuri);
+                    adapter = new MatchAdapter(getActivity(), meciuri);
                 } catch (Dota2StatsAccessException e1) {
                     // Do something if an error occurs
                 }
             }
         });
         t.start();
+        try {
+            t.join();
+            listView.setAdapter(adapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long arg3) {
+                    System.out.println("a dat click pe item");
+                    Intent intent = new Intent(getActivity(), MatchListActivity.class);
+                    intent.putExtra("match", meciuri.get(position));
+                    getActivity().startActivity(intent);
+                }
+            });
+            System.out.println("level erou" + meciuri.get(0).getPlayers().get(0).getHeroLevel());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return rootView;
     }
 
     @Override
     public void onResume() {
-        try {
-            t.join();
-            listView.setAdapter(adapter);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long arg3) {
-                System.out.println("a dat click pe item");
-                Intent intent = new Intent(getActivity(), MatchListActivity.class);
-                intent.putExtra("match",meciuri.get(position));
-                try {
-                    getActivity().startActivity(intent);
-                }
-                catch (Exception e){
-                    System.out.println("eroaree\n"+e);
-                }
-
-            }
-        });
         super.onResume();
     }
 }

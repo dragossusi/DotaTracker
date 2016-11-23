@@ -1,6 +1,8 @@
 package com.rachierudragos.dotatracker.Wrapper.domain;
 
-public enum GameMode {
+import java.io.Serializable;
+
+public enum GameMode implements Serializable {
 
 	All_Pick(1), Captains_Mode(2), Random_Draft(3), Single_Draft(4), All_Random(
 			5), INTRO_DEATH(6), The_Diretide(7), Reverse_Captains_Mode(8), Greeviling(

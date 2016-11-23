@@ -10,7 +10,7 @@ public class HeroDetail {
             "sven","tiny","vengefulspirit","windrunner","zuus","kunkka","","lina","lion","shadow_shaman","slardar","tidehunter",
             "witch_doctor","lich","riki","enigma","tinker","sniper","necrolyte","warlock","beastmaster","queenofpain","venomancer",
             "faceless_void","skeleton_king","death_prophet","phantom_assassin","pugna","templar_assassin","viper","luna","dragon_knight",
-            "dazzle","rattletrap","leshrac","furion","life_stealer","dark_seer","clinkz","omniknight","enchantress","huskar","nightstalker",
+            "dazzle","rattletrap","leshrac","furion","life_stealer","dark_seer","clinkz","omniknight","enchantress","huskar","night_stalker",
             "broodmother","bounty_hunter","weaver","jakiro","batrider","chen","spectre","ancient_apparition","doom_bringer",
             "ursa","spirit_breaker","gyrocopter","alchemist","invoker","silencer","obsidian_destroyer","lycan","brewmaster",
             "shadow_demon","lone_druid","chaos_knight","meepo","treant","ogre_magi","undying","rubick","disruptor","nyx_assassin",

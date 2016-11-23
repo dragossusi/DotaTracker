@@ -1,18 +1,17 @@
 package com.rachierudragos.dotatracker.Wrapper.domain.matchdetail.impl;
 
+import com.rachierudragos.dotatracker.Wrapper.domain.GameMode;
+import com.rachierudragos.dotatracker.Wrapper.domain.MatchOverview;
+import com.rachierudragos.dotatracker.Wrapper.domain.impl.MatchOverviewImpl;
+import com.rachierudragos.dotatracker.Wrapper.domain.matchdetail.MatchDetail;
+import com.rachierudragos.dotatracker.Wrapper.domain.matchdetail.MatchDetailPlayer;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.rachierudragos.dotatracker.Wrapper.domain.GameMode;
-import com.rachierudragos.dotatracker.Wrapper.domain.MatchOverview;
-import com.rachierudragos.dotatracker.Wrapper.domain.MatchOverviewPlayer;
-import com.rachierudragos.dotatracker.Wrapper.domain.impl.MatchOverviewImpl;
-import com.rachierudragos.dotatracker.Wrapper.domain.impl.MatchOverviewPlayerImpl;
-import com.rachierudragos.dotatracker.Wrapper.domain.matchdetail.MatchDetail;
-import com.rachierudragos.dotatracker.Wrapper.domain.matchdetail.MatchDetailPlayer;
-
-public class MatchDetailImpl implements MatchDetail {
+public class MatchDetailImpl implements MatchDetail, Serializable {
 
 	private static final String KEY_FIRST_BLOOD_TIME = "first_blood_time";
 	private static final String KEY_SEASON = "season";

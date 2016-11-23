@@ -19,10 +19,6 @@ import com.rachierudragos.dotatracker.Wrapper.domain.matchdetail.MatchDetailPlay
  * on handsets.
  */
 public class MatchDetailFragment extends Fragment {
-    /**
-     * The fragment argument representing the item ID that this fragment
-     * represents.
-     */
 
     /**
      * The dummy content this fragment is presenting.
@@ -62,11 +58,12 @@ public class MatchDetailFragment extends Fragment {
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.kda_detail)).setText(mItem.getKills()+"/"+mItem.getAssists()+"/"+mItem.getDeaths());
             //((TextView) rootView.findViewById(R.id.lvl_detail)).setText(mItem.getHeroLevel());
-            //((TextView)rootView.findViewById(R.id.gpm_detail)).setText(mItem.getGoldPerMinute());
-            //((TextView)rootView.findViewById(R.id.xpm_detail)).setText(mItem.getXPPerMinute());
-            //((TextView)rootView.findViewById(R.id.net_detail)).setText(mItem.getGold());
+            //((TextView) rootView.findViewById(R.id.gpm_detail)).setText(mItem.getGoldPerMinute());
+            //((TextView) rootView.findViewById(R.id.xpm_detail)).setText(mItem.getXPPerMinute());
+            //((TextView) rootView.findViewById(R.id.net_detail)).setText(mItem.getGold());
+            System.out.println("level erou"+mItem.getHeroLevel());
         }
-        System.out.println("o pornit fragmentarea");
+        //System.out.println("o pornit fragmentarea "+mItem.getHeroLevel());
         return rootView;
     }
 }

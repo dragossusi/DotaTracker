@@ -29,6 +29,7 @@ import java.util.List;
  */
 public class MatchListActivity extends AppCompatActivity {
     private MatchDetail matchDetail;
+    private Context context;
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -43,13 +44,13 @@ public class MatchListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
-        Intent intent = getIntent();
-        matchDetail = (MatchDetail) intent.getSerializableExtra("match");
-
+        context=this;
+        Intent intentAnt = getIntent();
+        matchDetail = (MatchDetail) intentAnt.getSerializableExtra("match");
+        System.out.println("level erou"+matchDetail.getPlayers().get(0).getHeroLevel());
         View recyclerView = findViewById(R.id.match_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
-
         if (findViewById(R.id.match_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
@@ -97,9 +98,9 @@ public class MatchListActivity extends AppCompatActivity {
                                 .replace(R.id.match_detail_container, fragment)
                                 .commit();
                     } else {
-                        Context context = v.getContext();
                         Intent intent = new Intent(context, MatchDetailActivity.class);
                         intent.putExtra("player", holder.mItem);
+                        System.out.println("level erou"+holder.mItem.getHeroLevel());
                         context.startActivity(intent);
                     }
                 }

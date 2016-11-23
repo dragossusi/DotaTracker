@@ -1,6 +1,8 @@
 package com.rachierudragos.dotatracker.Wrapper.domain;
 
-public enum LeaverStatus {
+import java.io.Serializable;
+
+public enum LeaverStatus implements Serializable {
 
 	Stayed(0), SaveLeaver(1), AbandonedGame(2), Bot(4);
 
