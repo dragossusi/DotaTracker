@@ -1,11 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.rachierudragos.dotatracker.MatchDetailFragment"
--->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Level"
+            android:id="@+id/lvl"
+            android:padding="12dp"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:textAlignment="textStart" />
+
+        <TextView
+            android:id="@+id/lvl_detail"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="Val"
+            android:textIsSelectable="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/lvl"
+            android:textAlignment="textEnd" />
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -122,8 +147,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Networth"
-            android:id="@+id/lvl"
+            android:text="LH/DN"
+            android:id="@+id/lhd"
             android:padding="12dp"
             style="?android:attr/textAppearanceLarge"
             android:layout_alignParentTop="true"
@@ -131,7 +156,7 @@
             android:textAlignment="textStart" />
 
         <TextView
-            android:id="@+id/lvl_detail"
+            android:id="@+id/lhd_detail"
             style="?android:attr/textAppearanceLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

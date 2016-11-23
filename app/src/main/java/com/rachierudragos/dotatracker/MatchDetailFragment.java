@@ -24,7 +24,6 @@ public class MatchDetailFragment extends Fragment {
      * The dummy content this fragment is presenting.
      */
     private MatchDetailPlayer mItem;
-
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -52,18 +51,19 @@ public class MatchDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.match_detail, container, false);
-
-        // Show the dummy content as text in a TextView.
+        View rootView = inflater.inflate(R.layout.player_detail, container, false);
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.kda_detail)).setText(mItem.getKills()+"/"+mItem.getAssists()+"/"+mItem.getDeaths());
-            //((TextView) rootView.findViewById(R.id.lvl_detail)).setText(mItem.getHeroLevel());
-            //((TextView) rootView.findViewById(R.id.gpm_detail)).setText(mItem.getGoldPerMinute());
-            //((TextView) rootView.findViewById(R.id.xpm_detail)).setText(mItem.getXPPerMinute());
-            //((TextView) rootView.findViewById(R.id.net_detail)).setText(mItem.getGold());
-            System.out.println("level erou"+mItem.getHeroLevel());
+            try {
+                ((TextView) rootView.findViewById(R.id.lvl_detail)).setText(""+mItem.getHeroLevel());
+                ((TextView) rootView.findViewById(R.id.gpm_detail)).setText(String.valueOf(mItem.getGoldPerMinute()));
+                ((TextView) rootView.findViewById(R.id.xpm_detail)).setText(String.valueOf(mItem.getXPPerMinute()));
+                ((TextView) rootView.findViewById(R.id.net_detail)).setText(String.valueOf(mItem.getGoldSpent()));
+                ((TextView) rootView.findViewById(R.id.lhd_detail)).setText(mItem.getLastHits()+"/"+mItem.getDenies());
+            }catch (Exception e) {
+                System.out.println("eroare aici boss"+e);
+            }
         }
-        //System.out.println("o pornit fragmentarea "+mItem.getHeroLevel());
         return rootView;
     }
 }
