@@ -58,8 +58,8 @@ public class MatchDetailFragment extends Fragment {
                 ((TextView) rootView.findViewById(R.id.lvl_detail)).setText(""+mItem.getHeroLevel());
                 ((TextView) rootView.findViewById(R.id.gpm_detail)).setText(String.valueOf(mItem.getGoldPerMinute()));
                 ((TextView) rootView.findViewById(R.id.xpm_detail)).setText(String.valueOf(mItem.getXPPerMinute()));
-                ((TextView) rootView.findViewById(R.id.net_detail)).setText(String.valueOf(mItem.getGoldSpent()));
                 ((TextView) rootView.findViewById(R.id.lhd_detail)).setText(mItem.getLastHits()+"/"+mItem.getDenies());
+                ((TextView) rootView.findViewById(R.id.net_detail)).setText(String.valueOf(mItem.getGoldSpent()+mItem.getGold()));
             }catch (Exception e) {
                 System.out.println("eroare aici boss"+e);
             }

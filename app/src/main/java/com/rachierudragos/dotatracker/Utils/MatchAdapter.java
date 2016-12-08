@@ -51,7 +51,7 @@ public class MatchAdapter extends ArrayAdapter<MatchDetail> {
         boolean team=true;
         List<MatchDetailPlayer> players = matchDetail.getPlayers();
         for(int i=0;i<players.size();++i)
-            if (players.get(i).getAccountId() == MainActivity.ID) {
+            if (players.get(i).getAccountId() == MainActivity.getID()) {
                 id = players.get(i).getHeroId();
                 if(i<5)team=RADIANT;
                 else team=DIRE;

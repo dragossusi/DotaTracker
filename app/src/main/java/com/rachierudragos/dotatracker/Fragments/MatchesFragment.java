@@ -47,7 +47,7 @@ public class MatchesFragment extends Fragment {
         t = new Thread(new Runnable() {
             public void run() {
                 try {
-                    MatchHistory history = stats.getMatchHistory(new MatchHistoryFilter().forAccountId(MainActivity.ID).forMaximumNumberOfResults(10));
+                    MatchHistory history = stats.getMatchHistory(new MatchHistoryFilter().forAccountId(MainActivity.getID()).forMaximumNumberOfResults(10));
                     List<MatchOverview> overviews = history.getMatchOverviews();
                     for (MatchOverview match : overviews) {
                         meciuri.add(stats.getMatchDetails(match.getMatchId()));
@@ -71,7 +71,6 @@ public class MatchesFragment extends Fragment {
                     getActivity().startActivity(intent);
                 }
             });
-            System.out.println("level erou" + meciuri.get(0).getPlayers().get(0).getHeroLevel());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

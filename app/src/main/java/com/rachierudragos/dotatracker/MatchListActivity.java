@@ -2,6 +2,7 @@ package com.rachierudragos.dotatracker;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -44,10 +45,10 @@ public class MatchListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
-        context=this;
+        context = this;
         Intent intentAnt = getIntent();
         matchDetail = (MatchDetail) intentAnt.getSerializableExtra("match");
-        System.out.println("level erou"+matchDetail.getPlayers().get(0).getHeroLevel());
+        System.out.println("level erou" + matchDetail.getPlayers().get(0).getHeroLevel());
         View recyclerView = findViewById(R.id.match_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
@@ -84,6 +85,10 @@ public class MatchListActivity extends AppCompatActivity {
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
             holder.mIdView.setText(String.valueOf(mValues.get(position).getAccountId()));
+            if (position < 5)
+                holder.mView.setBackgroundColor(Color.GREEN);
+            else
+                holder.mView.setBackgroundColor(Color.RED);
             holder.mContentView.setImageResource(getResources().getIdentifier(HeroDetail.getHeroName(mValues.get(position).getHeroId()), "drawable", getPackageName()));//mValues.get(position));
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +105,7 @@ public class MatchListActivity extends AppCompatActivity {
                     } else {
                         Intent intent = new Intent(context, MatchDetailActivity.class);
                         intent.putExtra("player", holder.mItem);
-                        System.out.println("level erou"+holder.mItem.getHeroLevel());
+                        System.out.println("level erou" + holder.mItem.getHeroLevel());
                         context.startActivity(intent);
                     }
                 }
