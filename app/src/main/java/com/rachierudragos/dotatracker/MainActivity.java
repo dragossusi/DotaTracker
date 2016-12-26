@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rachierudragos.dotatracker.Fragments.MatchesFragment;
 import com.rachierudragos.dotatracker.Wrapper.Dota2Stats;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity
     private Dota2Stats stats;
     private FragmentManager fm;
     private static long ID;
+    private View header;
     AccountDetails accountDetails;
     SharedPreferences preference;
 
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        View header = navigationView.getHeaderView(0);
+        header = navigationView.getHeaderView(0);
 
         //generat de ei
 
@@ -67,32 +69,45 @@ public class MainActivity extends AppCompatActivity
             dialogID();
         }
         else {
-            userdetails(header);
-            fm.beginTransaction().replace(R.id.content_main, new MatchesFragment()).commit();
+            if(userdetails())
+                fm.beginTransaction().replace(R.id.content_main, new MatchesFragment()).commit();
+            else
+                dialogID();
         }
     }
 
-    private void userdetails(View header) {
+    private boolean userdetails() {
         ImageView ivpoza = (ImageView) header.findViewById(R.id.img_acc);
         TextView tvmmrs = (TextView) header.findViewById(R.id.text_mmrs);
         TextView tvmmrp = (TextView) header.findViewById(R.id.text_mmrp);
         TextView tvnume = (TextView) header.findViewById(R.id.txt_nume);
+        final boolean[] aMers = new boolean[1];
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                accountDetails = new AccountDetailsImpl(String.valueOf(ID));
+                try {
+                    accountDetails = new AccountDetailsImpl(String.valueOf(ID));
+                    aMers[0] = true;
+                } catch (Exception e) {
+                    aMers[0] = false;
+                }
             }
         });
         t.start();
         try {
             t.join();
-            tvmmrs.setText("" + accountDetails.getSoloMMR());
-            tvmmrp.setText("" + accountDetails.getPartyMMR());
-            tvnume.setText(accountDetails.getName());
-            new ImageDownloaderTask(ivpoza, accountDetails.getPhotoURL(), this).execute(accountDetails.getPhotoURL());
+            if(aMers[0]) {
+                tvmmrs.setText("" + accountDetails.getSoloMMR());
+                tvmmrp.setText("" + accountDetails.getPartyMMR());
+                tvnume.setText(accountDetails.getName());
+                new ImageDownloaderTask(ivpoza, accountDetails.getPhotoURL(), this).execute(accountDetails.getPhotoURL());
+            } else {
+                Toast.makeText(this,"ID can't be parsed",Toast.LENGTH_LONG).show();
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        return aMers[0];
     }
 
     @Override
@@ -145,7 +160,10 @@ public class MainActivity extends AppCompatActivity
                             ID = Long.parseLong(editText.getText().toString());
                             SharedPreferences.Editor editor = preference.edit();
                             editor.putLong("idd", ID).commit();
-                            fm.beginTransaction().replace(R.id.content_main, new MatchesFragment()).commit();
+                            if(userdetails())
+                                fm.beginTransaction().replace(R.id.content_main, new MatchesFragment()).commit();
+                            else
+                                dialogID();
                         }
                     }
                 });
