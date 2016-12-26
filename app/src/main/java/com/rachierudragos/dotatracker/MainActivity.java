@@ -60,11 +60,19 @@ public class MainActivity extends AppCompatActivity
 
         //generat de ei
 
+        fm = getFragmentManager();
         preference = PreferenceManager.getDefaultSharedPreferences(this);
-        ID = preference.getLong("id", -1);
-        if(ID==-1)
+        ID = preference.getLong("idd",0);
+        if(ID==0) {
             dialogID();
+        }
+        else {
+            userdetails(header);
+            fm.beginTransaction().replace(R.id.content_main, new MatchesFragment()).commit();
+        }
+    }
 
+    private void userdetails(View header) {
         ImageView ivpoza = (ImageView) header.findViewById(R.id.img_acc);
         TextView tvmmrs = (TextView) header.findViewById(R.id.text_mmrs);
         TextView tvmmrp = (TextView) header.findViewById(R.id.text_mmrp);
@@ -85,8 +93,6 @@ public class MainActivity extends AppCompatActivity
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        fm = getFragmentManager();
-        fm.beginTransaction().replace(R.id.content_main, new MatchesFragment()).commit();
     }
 
     @Override
@@ -131,17 +137,19 @@ public class MainActivity extends AppCompatActivity
         final EditText editText = new EditText(this);
         //LinearLayout
         builder.setView(editText)
+                .setTitle("Give the Dota2 Id")
                 .setPositiveButton("Set", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (!editText.getText().toString().equals("")) {
                             ID = Long.parseLong(editText.getText().toString());
                             SharedPreferences.Editor editor = preference.edit();
-                            editor.putLong("id", ID).commit();
+                            editor.putLong("idd", ID).commit();
+                            fm.beginTransaction().replace(R.id.content_main, new MatchesFragment()).commit();
                         }
                     }
                 });
-
+        builder.show();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

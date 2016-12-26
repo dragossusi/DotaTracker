@@ -16,7 +16,7 @@ public class HeroDetail {
             "shadow_demon","lone_druid","chaos_knight","meepo","treant","ogre_magi","undying","rubick","disruptor","nyx_assassin",
             "naga_siren","keeper_of_the_light","wisp","visage","slark","medusa","troll_warlord","centaur","magnataur","shredder",
             "bristleback","tusk","skywrath_mage","abaddon","elder_titan","legion_commander","techies","ember_spirit","earth_spirit",
-            "abyssal_underlord","terrorblade","phoenix","oracle","winter_wyvern","arc_warden"
+            "abyssal_underlord","terrorblade","phoenix","oracle","winter_wyvern","arc_warden","monkey_king"
     };
 
     public static String getHeroName(int id){
