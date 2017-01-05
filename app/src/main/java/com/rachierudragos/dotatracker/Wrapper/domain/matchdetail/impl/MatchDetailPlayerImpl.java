@@ -1,12 +1,11 @@
 package com.rachierudragos.dotatracker.Wrapper.domain.matchdetail.impl;
 
-import java.util.List;
-import java.util.Map;
-
 import com.rachierudragos.dotatracker.Wrapper.domain.LeaverStatus;
 import com.rachierudragos.dotatracker.Wrapper.domain.impl.MatchOverviewPlayerImpl;
-import com.rachierudragos.dotatracker.Wrapper.domain.matchdetail.Item;
 import com.rachierudragos.dotatracker.Wrapper.domain.matchdetail.MatchDetailPlayer;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class MatchDetailPlayerImpl extends MatchOverviewPlayerImpl implements
 		MatchDetailPlayer {
@@ -17,6 +16,9 @@ public class MatchDetailPlayerImpl extends MatchOverviewPlayerImpl implements
 	private static final String KEY_ITEM_3 = "item_3";
 	private static final String KEY_ITEM_4 = "item_4";
 	private static final String KEY_ITEM_5 = "item_5";
+	private static final String KEY_BACK_0 = "backpack_0";
+	private static final String KEY_BACK_1 = "backpack_1";
+	private static final String KEY_BACK_2 = "backpack_2";
 
 	private static final String KEY_KILLS = "kills";
 	private static final String KEY_DEATHS = "deaths";
@@ -53,16 +55,23 @@ public class MatchDetailPlayerImpl extends MatchOverviewPlayerImpl implements
 	}
 
 	@Override
-	public List<Item> getItems() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Integer> getItems() {
+		ArrayList<Integer> items= new ArrayList<>();
+		items.add(((Double) jsonMap.get(KEY_ITEM_0)).intValue());
+		items.add(((Double) jsonMap.get(KEY_ITEM_1)).intValue());
+		items.add(((Double) jsonMap.get(KEY_ITEM_2)).intValue());
+		items.add(((Double) jsonMap.get(KEY_ITEM_3)).intValue());
+		items.add(((Double) jsonMap.get(KEY_ITEM_4)).intValue());
+		items.add(((Double) jsonMap.get(KEY_ITEM_5)).intValue());
+		items.add(((Double) jsonMap.get(KEY_BACK_0)).intValue());
+		items.add(((Double) jsonMap.get(KEY_BACK_1)).intValue());
+		items.add(((Double) jsonMap.get(KEY_BACK_2)).intValue());
+		return items;
 	}
 
 	@Override
 	public int getKills() {
-
 		return ((Double) jsonMap.get(KEY_KILLS)).intValue();
-
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface MatchDetailPlayer extends MatchOverviewPlayer, Serializable {
 	
-	public List<Item> getItems();
+	public List<Integer> getItems();
 
 	public int getKills();
 

@@ -7,10 +7,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rachierudragos.dotatracker.Wrapper.HeroDetail;
+import com.rachierudragos.dotatracker.Wrapper.ItemDetail;
 import com.rachierudragos.dotatracker.Wrapper.domain.matchdetail.MatchDetailPlayer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A fragment representing a single Match detail screen.
@@ -54,14 +59,31 @@ public class MatchDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.player_detail, container, false);
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.kda_detail)).setText(mItem.getKills()+"/"+mItem.getDeaths()+"/"+mItem.getAssists());
-            try {
-                ((TextView) rootView.findViewById(R.id.lvl_detail)).setText(""+mItem.getHeroLevel());
-                ((TextView) rootView.findViewById(R.id.gpm_detail)).setText(String.valueOf(mItem.getGoldPerMinute()));
-                ((TextView) rootView.findViewById(R.id.xpm_detail)).setText(String.valueOf(mItem.getXPPerMinute()));
-                ((TextView) rootView.findViewById(R.id.lhd_detail)).setText(mItem.getLastHits()+"/"+mItem.getDenies());
-                ((TextView) rootView.findViewById(R.id.net_detail)).setText(String.valueOf(mItem.getGoldSpent()+mItem.getGold()));
-            }catch (Exception e) {
-                System.out.println("eroare aici boss"+e);
+            ((TextView) rootView.findViewById(R.id.lvl_detail)).setText(""+mItem.getHeroLevel());
+            ((TextView) rootView.findViewById(R.id.gpm_detail)).setText(String.valueOf(mItem.getGoldPerMinute()));
+            ((TextView) rootView.findViewById(R.id.xpm_detail)).setText(String.valueOf(mItem.getXPPerMinute()));
+            ((TextView) rootView.findViewById(R.id.lhd_detail)).setText(mItem.getLastHits()+"/"+mItem.getDenies());
+            ((TextView) rootView.findViewById(R.id.net_detail)).setText(String.valueOf(mItem.getGoldSpent()+mItem.getGold()));
+            List<Integer> iteme = mItem.getItems();
+            int displayWidth = getActivity().getWindowManager().getDefaultDisplay().getWidth();
+            int displayHeight = displayWidth * 8 / 11;
+            ArrayList<ImageView> ivs = new ArrayList<>();
+            ivs.add((ImageView) rootView.findViewById(R.id.item_0));
+            ivs.add((ImageView) rootView.findViewById(R.id.item_1));
+            ivs.add((ImageView) rootView.findViewById(R.id.item_2));
+            ivs.add((ImageView) rootView.findViewById(R.id.item_3));
+            ivs.add((ImageView) rootView.findViewById(R.id.item_4));
+            ivs.add((ImageView) rootView.findViewById(R.id.item_5));
+            ivs.add((ImageView) rootView.findViewById(R.id.back_0));
+            ivs.add((ImageView) rootView.findViewById(R.id.back_1));
+            ivs.add((ImageView) rootView.findViewById(R.id.back_2));
+            int pos = 0;
+            for(ImageView i:ivs) {
+                i.setImageResource(getResources().getIdentifier(ItemDetail.getName(iteme.get(pos)), "drawable", getActivity().getPackageName()));
+                i.getLayoutParams().width = displayWidth / 3;
+                i.getLayoutParams().height = displayHeight / 3;
+                i.setScaleType(ImageView.ScaleType.FIT_XY);
+                ++pos;
             }
         }
         return rootView;
