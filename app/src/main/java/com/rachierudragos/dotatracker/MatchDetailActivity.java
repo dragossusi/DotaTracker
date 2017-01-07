@@ -1,6 +1,5 @@
 package com.rachierudragos.dotatracker;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -63,7 +62,8 @@ public class MatchDetailActivity extends AppCompatActivity {
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            navigateUpTo(new Intent(this, MatchListActivity.class));
+            //navigateUpTo(new Intent(this, MatchListActivity.class));
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);

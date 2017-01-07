@@ -217,6 +217,10 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true" />
     </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/despartit"/>
     <RelativeLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent">

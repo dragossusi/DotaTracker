@@ -48,7 +48,6 @@ public class MatchListActivity extends AppCompatActivity {
         context = this;
         Intent intentAnt = getIntent();
         matchDetail = (MatchDetail) intentAnt.getSerializableExtra("match");
-        System.out.println("level erou" + matchDetail.getPlayers().get(0).getHeroLevel());
         View recyclerView = findViewById(R.id.match_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);

@@ -33,4 +33,5 @@ dependencies {
     compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
     compile 'com.android.support:recyclerview-v7:25.0.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.jjoe64:graphview:4.2.1'
 }
