@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.rachierudragos.dotatracker.Wrapper.domain.matchdetail.MatchDetailPlayer;
+import com.rachierudragos.dotatracker.Wrapper.match.MatchDetail;
 
 /**
  * An activity representing a single Match detail screen. This
@@ -15,7 +15,7 @@ import com.rachierudragos.dotatracker.Wrapper.domain.matchdetail.MatchDetailPlay
  * in a {@link MatchListActivity}.
  */
 public class MatchDetailActivity extends AppCompatActivity {
-    private MatchDetailPlayer player;
+    private MatchDetail.Player player;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +41,7 @@ public class MatchDetailActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
-            player =(MatchDetailPlayer) getIntent().getSerializableExtra("player");
+            player =(MatchDetail.Player) getIntent().getSerializableExtra("player");
             Bundle arguments = new Bundle();
             arguments.putSerializable("player",player);
             MatchDetailFragment fragment = new MatchDetailFragment();

@@ -17,15 +17,8 @@ import com.rachierudragos.dotatracker.MainActivity;
 import com.rachierudragos.dotatracker.MatchListActivity;
 import com.rachierudragos.dotatracker.R;
 import com.rachierudragos.dotatracker.Utils.MatchAdapter;
-import com.rachierudragos.dotatracker.Wrapper.Dota2Stats;
-import com.rachierudragos.dotatracker.Wrapper.domain.MatchOverview;
-import com.rachierudragos.dotatracker.Wrapper.domain.filter.MatchHistoryFilter;
-import com.rachierudragos.dotatracker.Wrapper.domain.matchdetail.MatchDetail;
-import com.rachierudragos.dotatracker.Wrapper.domain.matchhistory.MatchHistory;
-import com.rachierudragos.dotatracker.Wrapper.exceptions.Dota2StatsAccessException;
-import com.rachierudragos.dotatracker.Wrapper.impl.Dota2StatsImpl;
+import com.rachierudragos.dotatracker.Wrapper.match.MatchPreview;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,21 +26,19 @@ import java.util.List;
  */
 
 public class MatchesFragment extends Fragment {
-
-    private Dota2Stats stats;
     private ListView listView;
-    private ArrayList<MatchDetail> meciuri;
+    private List<MatchPreview> meciuri;
     private MatchAdapter adapter;
     private View rootView;
+    private long ID;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_matches, container, false);
         listView = (ListView) rootView.findViewById(R.id.list_lastmatches);
-        stats = new Dota2StatsImpl("E1CF20517738CE047F04CC4823904781");
-        meciuri = new ArrayList<>();
-        if(MainActivity.getID()!=-1)
+        ID = MainActivity.getID();
+        if(ID!=-1)
             new GetMatches().execute(null,null,null);
         else
             Toast.makeText(getActivity(),"id incorect",Toast.LENGTH_LONG);
@@ -56,14 +47,11 @@ public class MatchesFragment extends Fragment {
     private class GetMatches extends AsyncTask<Void, Void, Void> {
         protected Void doInBackground(Void... urls) {
             try {
-                MatchHistory history = stats.getMatchHistory(new MatchHistoryFilter().forAccountId(MainActivity.getID()).forMaximumNumberOfResults(10));
-                List<MatchOverview> overviews = history.getMatchOverviews();
-                for (MatchOverview match : overviews) {
-                    meciuri.add(stats.getMatchDetails(match.getMatchId()));
-                }
+                meciuri = MainActivity.api.getMatches(ID);
                 adapter = new MatchAdapter(getActivity(), meciuri);
-            } catch (Dota2StatsAccessException e1) {
+            } catch (Exception e) {
                 // Do something if an error occurs
+                e.printStackTrace();
             }
             return null;
         }

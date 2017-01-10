@@ -10,30 +10,25 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.rachierudragos.dotatracker.MainActivity;
 import com.rachierudragos.dotatracker.R;
-import com.rachierudragos.dotatracker.Wrapper.HeroDetail;
-import com.rachierudragos.dotatracker.Wrapper.domain.matchdetail.MatchDetail;
-import com.rachierudragos.dotatracker.Wrapper.domain.matchdetail.MatchDetailPlayer;
+import com.rachierudragos.dotatracker.Wrapper.hero.HeroDatabase;
+import com.rachierudragos.dotatracker.Wrapper.match.MatchPreview;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Dragos on 10.11.2016.
  */
 
-public class MatchAdapter extends ArrayAdapter<MatchDetail> {
+public class MatchAdapter extends ArrayAdapter<MatchPreview> {
 
-    public static final boolean RADIANT=true,DIRE=false;
-
-    public MatchAdapter(Context context, ArrayList<MatchDetail> matches) {
+    public MatchAdapter(Context context, List<MatchPreview> matches) {
         super(context, 0, matches);
     }
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        MatchDetail matchDetail = getItem(position);
+        MatchPreview matchDetail = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_list, parent, false);
@@ -44,23 +39,16 @@ public class MatchAdapter extends ArrayAdapter<MatchDetail> {
         TextView tv3 = (TextView) convertView.findViewById(R.id.txt_duration);
         ImageView iv = (ImageView) convertView.findViewById(R.id.img_hero);
         // Populate the data into the template view using the data object
-        tv1.setText(String.valueOf(matchDetail.getMatchOverview().getMatchId()));
-        int mins = matchDetail.getDurationOfMatch()/60;
-        int secs = matchDetail.getDurationOfMatch()%60;
+        tv1.setText(String.valueOf(matchDetail.match_id));
+        int mins = matchDetail.duration/60;
+        int secs = matchDetail.duration%60;
         int id=-1;
         boolean team=true;
-        List<MatchDetailPlayer> players = matchDetail.getPlayers();
-        for(int i=0;i<players.size();++i)
-            if (players.get(i).getAccountId() == MainActivity.getID()) {
-                id = players.get(i).getHeroId();
-                if(i<5)team=RADIANT;
-                else team=DIRE;
-            }
-        iv.setImageResource(getContext().getResources().getIdentifier(HeroDetail.getHeroName(id), "drawable", getContext().getPackageName()));
+        iv.setImageResource(getContext().getResources().getIdentifier(HeroDatabase.getHeroIdName(matchDetail.hero_id), "drawable", getContext().getPackageName()));
         String text = (secs < 10 ? "0" : "") + secs;
         tv3.setText(mins+":"+text);
         ///^^^^^^^^^^^^^^^^^^ schimbat neaparat ^^^^^^^^^^^^^^^^^
-        if(matchDetail.didRadianWin()==team) {
+        if(matchDetail.radiant_win==(matchDetail.player_slot<128)) {
             tv2.setText("Win");
             tv2.setTextColor(Color.GREEN);
         }

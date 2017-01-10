@@ -25,9 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rachierudragos.dotatracker.Fragments.MatchesFragment;
-import com.rachierudragos.dotatracker.Wrapper.Dota2Stats;
-import com.rachierudragos.dotatracker.Wrapper.account.AccountDetails;
-import com.rachierudragos.dotatracker.Wrapper.account.AccountDetailsImpl;
+import com.rachierudragos.dotatracker.Wrapper.ODotaAPI;
+import com.rachierudragos.dotatracker.Wrapper.account.AccountDetail;
 
 import org.apache.http.HttpStatus;
 
@@ -37,12 +36,12 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private Dota2Stats stats;
     private FragmentManager fm;
+    public static ODotaAPI api;
     private static long ID;
     private View header;
-    AccountDetails accountDetails;
     SharedPreferences preference;
+    AccountDetail accountDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity
         header = navigationView.getHeaderView(0);
 
         //generat de ei
-
+        api = new ODotaAPI();
         fm = getFragmentManager();
         preference = PreferenceManager.getDefaultSharedPreferences(this);
         ID = preference.getLong("idd",0);
@@ -86,7 +85,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void run() {
                 try {
-                    accountDetails = new AccountDetailsImpl(String.valueOf(ID));
+                    accountDetail = api.getPlayer(ID);
                     aMers[0] = true;
                 } catch (Exception e) {
                     aMers[0] = false;
@@ -97,10 +96,10 @@ public class MainActivity extends AppCompatActivity
         try {
             t.join();
             if(aMers[0]) {
-                tvmmrs.setText("" + accountDetails.getSoloMMR());
-                tvmmrp.setText("" + accountDetails.getPartyMMR());
-                tvnume.setText(accountDetails.getName());
-                new ImageDownloaderTask(ivpoza, accountDetails.getPhotoURL(), this).execute(accountDetails.getPhotoURL());
+                tvmmrs.setText(accountDetail.solo_competitive_rank);
+                tvmmrp.setText(accountDetail.competitive_rank);
+                tvnume.setText(accountDetail.profile.personaname);
+                new ImageDownloaderTask(ivpoza, accountDetail.profile.avatarfull, this).execute(accountDetail.profile.avatarfull);
             } else {
                 Toast.makeText(this,"ID can't be parsed",Toast.LENGTH_LONG).show();
             }

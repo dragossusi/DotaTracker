@@ -14,9 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.rachierudragos.dotatracker.Wrapper.HeroDetail;
-import com.rachierudragos.dotatracker.Wrapper.domain.matchdetail.MatchDetail;
-import com.rachierudragos.dotatracker.Wrapper.domain.matchdetail.MatchDetailPlayer;
+import com.rachierudragos.dotatracker.Wrapper.hero.HeroDatabase;
+import com.rachierudragos.dotatracker.Wrapper.match.MatchDetail;
 
 import java.util.List;
 
@@ -61,15 +60,15 @@ public class MatchListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(matchDetail.getPlayers()));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(matchDetail.players));
     }
 
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final List<MatchDetailPlayer> mValues;
+        private final List<MatchDetail.Player> mValues;
 
-        public SimpleItemRecyclerViewAdapter(List<MatchDetailPlayer> items) {
+        public SimpleItemRecyclerViewAdapter(List<MatchDetail.Player> items) {
             mValues = items;
         }
 
@@ -83,12 +82,15 @@ public class MatchListActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
-            holder.mIdView.setText(String.valueOf(mValues.get(position).getAccountId()));
+            if(holder.mItem.personaname!=null)
+                holder.mIdView.setText(holder.mItem.personaname);
+            else
+                holder.mIdView.setText("Unknown");
             if (position < 5)
                 holder.mView.setBackgroundColor(Color.GREEN);
             else
                 holder.mView.setBackgroundColor(Color.RED);
-            holder.mContentView.setImageResource(getResources().getIdentifier(HeroDetail.getHeroName(mValues.get(position).getHeroId()), "drawable", getPackageName()));//mValues.get(position));
+            holder.mContentView.setImageResource(getResources().getIdentifier(HeroDatabase.getHeroIdName(holder.mItem.hero_id), "drawable", getPackageName()));
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -104,7 +106,7 @@ public class MatchListActivity extends AppCompatActivity {
                     } else {
                         Intent intent = new Intent(context, MatchDetailActivity.class);
                         intent.putExtra("player", holder.mItem);
-                        System.out.println("level erou" + holder.mItem.getHeroLevel());
+                        System.out.println("level erou" + holder.mItem.level);
                         context.startActivity(intent);
                     }
                 }
@@ -120,7 +122,7 @@ public class MatchListActivity extends AppCompatActivity {
             public final View mView;
             public final TextView mIdView;
             public final ImageView mContentView;
-            public MatchDetailPlayer mItem;
+            public MatchDetail.Player mItem;
 
             public ViewHolder(View view) {
                 super(view);
