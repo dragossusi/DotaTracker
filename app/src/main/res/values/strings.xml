@@ -5,6 +5,12 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="action_graphs">Show Graphics</string>
+    <string name="action_graph_gpm">GPM Graph</string>
+    <string name="action_graph_xpm">XPM Graph</string>
+
+
     <string name="title_match_list">Players</string>
     <string name="title_match_detail">Player Detail</string>
+    <string name="title_graphs">Graphics</string>
 </resources>

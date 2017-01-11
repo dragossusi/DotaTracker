@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public class MatchDetail {
+public class MatchDetail implements Serializable {
 	public long match_id;
 	public int barracks_status_dire;
 	public int barracks_status_radiant;
@@ -39,7 +39,7 @@ public class MatchDetail {
 	public Map<String, Integer>all_word_counts;
 	public int comeback;
 	
-	public class Chat{
+	public class Chat {
 		public int time;
 		public String type;
 		public String unit;
@@ -56,8 +56,7 @@ public class MatchDetail {
 			return key;
 		}
 	}
-	
-	public class Player implements Serializable{
+	public class Player implements Serializable {
 		public long match_id;
 		public int player_slot;
 		//ability_upgrades_arr	[19]
@@ -100,9 +99,9 @@ public class MatchDetail {
 			return items;
 		}
 		
-		public Map<String, Integer>item_uses;
-		public Map<Integer, Integer>kill_streaks;
-		public Map<String, Integer>killed_by;
+		public Map<String, Integer> item_uses;
+		public Map<Integer, Integer> kill_streaks;
+		public Map<String, Integer> killed_by;
 		public int kills;
 		//kills_log	[17]
 		public int last_hits;
@@ -146,7 +145,7 @@ public class MatchDetail {
 		public int lane;
 		public int lane_role;
 	}
-	public class Unit{
+	public class Unit implements Serializable{
 		public String unitname;
 		public int item_0;
 		public int item_1;
@@ -155,7 +154,7 @@ public class MatchDetail {
 		public int item_4;
 		public int item_5;
 	}
-	public class PurchaseLog{
+	public class PurchaseLog implements Serializable{
 		public String key;
 		public int time;
 	}

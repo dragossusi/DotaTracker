@@ -1,8 +1,6 @@
 package com.rachierudragos.dotatracker.Wrapper.match;
 
-import java.io.Serializable;
-
-public class MatchPreview implements Serializable {
+public class MatchPreview {
 	public long match_id;
 	public int player_slot;
 	public boolean radiant_win;

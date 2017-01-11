@@ -24,18 +24,25 @@
         <activity
             android:name=".MatchListActivity"
             android:label="@string/title_match_list"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rachierudragos.dotatracker.MainActivity" />
-
         </activity>
         <activity
             android:name=".MatchDetailActivity"
             android:label="@string/title_match_detail"
             android:parentActivityName=".MatchListActivity"
             android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rachierudragos.dotatracker.MatchListActivity" />
+        </activity>
+        <activity
+            android:name=".GraphActivity"
+            android:label="@string/title_graphs"
+            android:parentActivityName=".MatchListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rachierudragos.dotatracker.MatchListActivity" />

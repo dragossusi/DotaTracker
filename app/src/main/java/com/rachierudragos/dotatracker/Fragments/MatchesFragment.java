@@ -17,6 +17,7 @@ import com.rachierudragos.dotatracker.MainActivity;
 import com.rachierudragos.dotatracker.MatchListActivity;
 import com.rachierudragos.dotatracker.R;
 import com.rachierudragos.dotatracker.Utils.MatchAdapter;
+import com.rachierudragos.dotatracker.Wrapper.filter.MatchFilter;
 import com.rachierudragos.dotatracker.Wrapper.match.MatchPreview;
 
 import java.util.List;
@@ -47,7 +48,9 @@ public class MatchesFragment extends Fragment {
     private class GetMatches extends AsyncTask<Void, Void, Void> {
         protected Void doInBackground(Void... urls) {
             try {
-                meciuri = MainActivity.api.getMatches(ID);
+                MatchFilter filter = new MatchFilter();
+                filter.setLimitTo(15);
+                meciuri = MainActivity.api.getMatches(ID,filter);
                 adapter = new MatchAdapter(getActivity(), meciuri);
             } catch (Exception e) {
                 // Do something if an error occurs
@@ -67,7 +70,7 @@ public class MatchesFragment extends Fragment {
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long arg3) {
                     System.out.println("a dat click pe item");
                     Intent intent = new Intent(getActivity(), MatchListActivity.class);
-                    intent.putExtra("match", meciuri.get(position));
+                    intent.putExtra("match_id", meciuri.get(position).match_id);
                     getActivity().startActivity(intent);
                 }
             });
