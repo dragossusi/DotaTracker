@@ -1,4 +1,4 @@
-package com.rachierudragos.dotatracker;
+package com.rachierudragos.dotatracker.Fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.rachierudragos.dotatracker.MatchActivities.MatchDetailActivity;
+import com.rachierudragos.dotatracker.MatchActivities.MatchListActivity;
+import com.rachierudragos.dotatracker.R;
 import com.rachierudragos.dotatracker.Wrapper.ItemDetail;
 import com.rachierudragos.dotatracker.Wrapper.hero.HeroDatabase;
 import com.rachierudragos.dotatracker.Wrapper.match.MatchDetail;

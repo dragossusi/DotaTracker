@@ -1,4 +1,4 @@
-package com.rachierudragos.dotatracker;
+package com.rachierudragos.dotatracker.MatchActivities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +18,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.rachierudragos.dotatracker.Fragments.MatchDetailFragment;
+import com.rachierudragos.dotatracker.MainActivity;
+import com.rachierudragos.dotatracker.R;
 import com.rachierudragos.dotatracker.Wrapper.hero.HeroDatabase;
 import com.rachierudragos.dotatracker.Wrapper.match.MatchDetail;
 
@@ -70,6 +73,12 @@ public class MatchListActivity extends AppCompatActivity {
             Intent intent = new Intent(this,GraphActivity.class);
             intent.putExtra("gpm",(Serializable)matchDetail.radiant_gold_adv);
             intent.putExtra("xpm",(Serializable)matchDetail.radiant_xp_adv);
+            context.startActivity(intent);
+            return true;
+        }
+        if (id == R.id.action_chat) {
+            Intent intent = new Intent(this,ChatActivity.class);
+            intent.putExtra("chat",(Serializable)matchDetail.chat);
             context.startActivity(intent);
             return true;
         }

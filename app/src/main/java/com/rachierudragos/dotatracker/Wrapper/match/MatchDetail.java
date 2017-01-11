@@ -39,7 +39,7 @@ public class MatchDetail implements Serializable {
 	public Map<String, Integer>all_word_counts;
 	public int comeback;
 	
-	public class Chat {
+	public class Chat implements Serializable{
 		public int time;
 		public String type;
 		public String unit;

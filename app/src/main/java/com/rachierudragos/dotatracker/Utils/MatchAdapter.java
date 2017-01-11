@@ -39,7 +39,7 @@ public class MatchAdapter extends ArrayAdapter<MatchPreview> {
         TextView tv3 = (TextView) convertView.findViewById(R.id.txt_duration);
         ImageView iv = (ImageView) convertView.findViewById(R.id.img_hero);
         // Populate the data into the template view using the data object
-        tv1.setText(String.valueOf(matchDetail.match_id));
+        tv1.setText(HeroDatabase.getHeroName(matchDetail.hero_id));
         int mins = matchDetail.duration/60;
         int secs = matchDetail.duration%60;
         int id=-1;

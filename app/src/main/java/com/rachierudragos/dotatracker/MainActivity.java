@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity
     private FragmentManager fm;
     public static ODotaAPI api;
     private static long ID;
+    private static int matches_number;
     private View header;
     SharedPreferences preference;
     AccountDetail accountDetail;
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity
         fm = getFragmentManager();
         preference = PreferenceManager.getDefaultSharedPreferences(this);
         ID = preference.getLong("idd",0);
+        matches_number = preference.getInt("matches_number",15);
         if(ID==0) {
             dialogID();
         }
@@ -74,6 +76,10 @@ public class MainActivity extends AppCompatActivity
             else
                 dialogID();
         }
+    }
+
+    public static int getMatches_number() {
+        return matches_number;
     }
 
     private boolean userdetails() {
@@ -140,7 +146,10 @@ public class MainActivity extends AppCompatActivity
             dialogID();
             return true;
         }
-
+        if(id ==R.id.action_matches_number) {
+            dialogMatchesNumber();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -165,6 +174,30 @@ public class MainActivity extends AppCompatActivity
                                 fm.beginTransaction().replace(R.id.content_main, new MatchesFragment()).commit();
                             else
                                 dialogID();
+                        }
+                    }
+                });
+        builder.show();
+    }
+
+    private void dialogMatchesNumber() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final EditText editText = new EditText(this);
+        builder.setView(editText)
+                .setTitle("Set number of recent matches to ")
+                .setPositiveButton("Set", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (!editText.getText().toString().equals("")) {
+                            int nr = Integer.parseInt(editText.getText().toString());
+                            if(nr<50)
+                                matches_number = nr;
+                            else {
+                                matches_number = 50;
+                                Toast.makeText(MainActivity.this,"Maximum number of recent matches is 50",Toast.LENGTH_SHORT).show();
+                            }
+                            SharedPreferences.Editor editor = preference.edit();
+                            editor.putInt("matches_number", matches_number).commit();
                         }
                     }
                 });

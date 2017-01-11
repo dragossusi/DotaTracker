@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MatchListActivity"
+            android:name=".MatchActivities.MatchListActivity"
             android:label="@string/title_match_list"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -31,22 +31,23 @@
                 android:value="com.rachierudragos.dotatracker.MainActivity" />
         </activity>
         <activity
-            android:name=".MatchDetailActivity"
+            android:name=".MatchActivities.MatchDetailActivity"
             android:label="@string/title_match_detail"
-            android:parentActivityName=".MatchListActivity"
+            android:parentActivityName=".MatchActivities.MatchListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.rachierudragos.dotatracker.MatchListActivity" />
+                android:value="com.rachierudragos.dotatracker.MatchActivities.MatchListActivity" />
         </activity>
         <activity
-            android:name=".GraphActivity"
+            android:name=".MatchActivities.GraphActivity"
             android:label="@string/title_graphs"
-            android:parentActivityName=".MatchListActivity">
+            android:parentActivityName=".MatchActivities.MatchListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.rachierudragos.dotatracker.MatchListActivity" />
+                android:value="com.rachierudragos.dotatracker.MatchActivities.MatchListActivity" />
         </activity>
+        <activity android:name=".MatchActivities.ChatActivity"></activity>
     </application>
 
 </manifest>

@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.rachierudragos.dotatracker.MainActivity;
-import com.rachierudragos.dotatracker.MatchListActivity;
+import com.rachierudragos.dotatracker.MatchActivities.MatchListActivity;
 import com.rachierudragos.dotatracker.R;
 import com.rachierudragos.dotatracker.Utils.MatchAdapter;
 import com.rachierudragos.dotatracker.Wrapper.filter.MatchFilter;
@@ -49,7 +49,7 @@ public class MatchesFragment extends Fragment {
         protected Void doInBackground(Void... urls) {
             try {
                 MatchFilter filter = new MatchFilter();
-                filter.setLimitTo(15);
+                filter.setLimitTo(MainActivity.getMatches_number());
                 meciuri = MainActivity.api.getMatches(ID,filter);
                 adapter = new MatchAdapter(getActivity(), meciuri);
             } catch (Exception e) {

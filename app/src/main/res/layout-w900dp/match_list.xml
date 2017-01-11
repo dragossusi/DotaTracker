@@ -9,7 +9,7 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context="com.rachierudragos.dotatracker.MatchListActivity">
+    tools:context="com.rachierudragos.dotatracker.MatchActivities.MatchListActivity">
 
     <!--
     This layout is a two-pane layout for the Matches
@@ -24,7 +24,7 @@
         android:layout_width="@dimen/item_width"
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
-        tools:context="com.rachierudragos.dotatracker.MatchListActivity"
+        tools:context="com.rachierudragos.dotatracker.MatchActivities.MatchListActivity"
         tools:listitem="@layout/match_list_content" />
 
     <FrameLayout

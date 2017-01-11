@@ -4,8 +4,12 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Change Account Id</string>
+    <string name="action_number">Change Number of matches</string>
+
     <string name="action_graphs">Show Graphics</string>
+    <string name="action_chat">Show Chat Log</string>
+
     <string name="action_graph_gpm">GPM Graph</string>
     <string name="action_graph_xpm">XPM Graph</string>
 

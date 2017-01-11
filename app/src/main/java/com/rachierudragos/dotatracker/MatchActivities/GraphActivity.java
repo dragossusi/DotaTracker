@@ -1,4 +1,4 @@
-package com.rachierudragos.dotatracker;
+package com.rachierudragos.dotatracker.MatchActivities;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import android.view.MenuItem;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.rachierudragos.dotatracker.R;
 
-import java.util.Collections;
 import java.util.List;
 
 public class GraphActivity extends AppCompatActivity {
@@ -21,36 +21,31 @@ public class GraphActivity extends AppCompatActivity {
     private static boolean XPM = false;
     private boolean afis_g = true;
     private boolean afis_x = true;
-    private int max_gpm;
-    private int max_xpm;
-    private int min_gpm;
-    private int min_xpm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
         graph = (GraphView) findViewById(R.id.graph);
-        graph.getViewport().setScalable(true);
-        graph.getViewport().setScrollable(true);
         List<Integer> gpm = (List<Integer>) getIntent().getSerializableExtra("gpm");
         List<Integer> xpm = (List<Integer>) getIntent().getSerializableExtra("xpm");
-        min_gpm = Collections.min(gpm);
-        min_xpm = Collections.min(xpm);
-        max_gpm = Collections.max(gpm);
-        max_xpm = Collections.max(xpm);
         DataPoint[] pointsg = new DataPoint[gpm.size()];
         DataPoint[] pointsx = new DataPoint[xpm.size()];
         for (int i = 0; i < gpm.size(); ++i) {
             pointsg[i] = (new DataPoint(i, gpm.get(i)));
             pointsx[i] = (new DataPoint(i, xpm.get(i)));
         }
+        ////GPM
         seriesg = new LineGraphSeries<DataPoint>(pointsg);
         seriesg.setColor(Color.YELLOW);
+        ////XPM
         seriesx = new LineGraphSeries<DataPoint>(pointsx);
         seriesx.setColor(Color.BLUE);
+        ////Graph
         graph.addSeries(seriesg);
         graph.addSeries(seriesx);
+        graph.getViewport().setScalable(true);
+        graph.getViewport().setScrollable(true);
         graph.setTitle("GPM&XPM");
     }
 
@@ -70,6 +65,10 @@ public class GraphActivity extends AppCompatActivity {
         }
         if (id == R.id.action_xpm) {
             changeGraph(XPM);
+            return true;
+        }
+        if (id == android.R.id.home) {
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
