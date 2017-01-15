@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.rachierudragos.dotatracker.Fragments.HeroesFragment;
 import com.rachierudragos.dotatracker.Fragments.MatchesFragment;
 import com.rachierudragos.dotatracker.Wrapper.ODotaAPI;
 import com.rachierudragos.dotatracker.Wrapper.account.AccountDetail;
@@ -216,7 +217,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_all_matches) {
 
         } else if (id == R.id.nav_heroes) {
-
+            fm.beginTransaction().replace(R.id.content_main, new HeroesFragment()).commit();
         } else if (id == R.id.nav_records) {
 
         } else if (id == R.id.nav_stats) {

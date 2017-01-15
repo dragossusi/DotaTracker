@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/antimage"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/image_hero" />
+
+    <TextView
+        android:padding="8dp"
+        android:text="AntiMage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hero_name"
+        android:textAppearance="@android:style/TextAppearance.Material.Small"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/image_hero"
+        android:textAlignment="center" />
+
+    <TextView
+        android:padding="8dp"
+        android:text="Games:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hero_name"
+        android:layout_toEndOf="@+id/image_hero"
+        android:textAppearance="@android:style/TextAppearance.Material.Small"
+        android:layout_alignBottom="@+id/image_hero"
+        android:textAlignment="textStart"
+        android:id="@+id/textView4" />
+
+    <TextView
+        android:text="56"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hero_name"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/hero_matches_number"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_toEndOf="@+id/textView4"
+        android:textAppearance="@android:style/TextAppearance.Material.Small"
+        android:gravity="right|center"
+        android:padding="8dp" />
+
+</RelativeLayout>

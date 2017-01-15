@@ -62,7 +62,7 @@ public class MatchDetail implements Serializable {
 		//ability_upgrades_arr	[19]
 		//ability_uses	Object
 		public long account_id;
-		public Unit additional_units;
+		public List<Unit> additional_units;
 		public int assists;
 		public int backpack_0;
 		public int backpack_1;
@@ -153,6 +153,22 @@ public class MatchDetail implements Serializable {
 		public int item_3;
 		public int item_4;
 		public int item_5;
+		public int backpack_0;
+		public int backpack_1;
+		public int backpack_2;
+		public List<Integer> getItems() {
+			List<Integer> items = new ArrayList<>();
+			items.add(item_0);
+			items.add(item_1);
+			items.add(item_2);
+			items.add(item_3);
+			items.add(item_4);
+			items.add(item_5);
+			items.add(backpack_0);
+			items.add(backpack_1);
+			items.add(backpack_2);
+			return items;
+		}
 	}
 	public class PurchaseLog implements Serializable{
 		public String key;

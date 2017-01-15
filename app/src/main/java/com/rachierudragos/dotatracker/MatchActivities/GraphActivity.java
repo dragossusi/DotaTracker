@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -27,26 +28,31 @@ public class GraphActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
         graph = (GraphView) findViewById(R.id.graph);
-        List<Integer> gpm = (List<Integer>) getIntent().getSerializableExtra("gpm");
-        List<Integer> xpm = (List<Integer>) getIntent().getSerializableExtra("xpm");
-        DataPoint[] pointsg = new DataPoint[gpm.size()];
-        DataPoint[] pointsx = new DataPoint[xpm.size()];
-        for (int i = 0; i < gpm.size(); ++i) {
-            pointsg[i] = (new DataPoint(i, gpm.get(i)));
-            pointsx[i] = (new DataPoint(i, xpm.get(i)));
+        try {
+            List<Integer> gpm = (List<Integer>) getIntent().getSerializableExtra("gpm");
+            List<Integer> xpm = (List<Integer>) getIntent().getSerializableExtra("xpm");
+            DataPoint[] pointsg = new DataPoint[gpm.size()];
+            DataPoint[] pointsx = new DataPoint[xpm.size()];
+            for (int i = 0; i < gpm.size(); ++i) {
+                pointsg[i] = (new DataPoint(i, gpm.get(i)));
+                pointsx[i] = (new DataPoint(i, xpm.get(i)));
+            }
+            ////GPM
+            seriesg = new LineGraphSeries<DataPoint>(pointsg);
+            seriesg.setColor(Color.YELLOW);
+            ////XPM
+            seriesx = new LineGraphSeries<DataPoint>(pointsx);
+            seriesx.setColor(Color.BLUE);
+            ////Graph
+            graph.addSeries(seriesg);
+            graph.addSeries(seriesx);
+            graph.getViewport().setScalable(true);
+            graph.getViewport().setScrollable(true);
+            graph.setTitle("GPM&XPM");
+        } catch (Exception e) {
+            Toast.makeText(this,"Match not parsed yet, please wait for opendota to parse it.",Toast.LENGTH_LONG);
+            finish();
         }
-        ////GPM
-        seriesg = new LineGraphSeries<DataPoint>(pointsg);
-        seriesg.setColor(Color.YELLOW);
-        ////XPM
-        seriesx = new LineGraphSeries<DataPoint>(pointsx);
-        seriesx.setColor(Color.BLUE);
-        ////Graph
-        graph.addSeries(seriesg);
-        graph.addSeries(seriesx);
-        graph.getViewport().setScalable(true);
-        graph.getViewport().setScrollable(true);
-        graph.setTitle("GPM&XPM");
     }
 
     @Override
