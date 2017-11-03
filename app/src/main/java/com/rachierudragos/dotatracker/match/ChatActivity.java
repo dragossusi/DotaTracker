@@ -1,26 +1,31 @@
-package com.rachierudragos.dotatracker.MatchActivities;
+package com.rachierudragos.dotatracker.match;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.rachierudragos.dotatracker.R;
-import com.rachierudragos.dotatracker.Utils.ChatAdapter;
+import com.rachierudragos.dotatracker.Wrapper.match.Chat;
+import com.rachierudragos.dotatracker.adapter.ChatAdapter;
 import com.rachierudragos.dotatracker.Wrapper.match.MatchDetail;
 
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
-    List<MatchDetail.Chat> chats;
-    ListView listView;
+    List<Chat> chats;
+    RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        chats = (List<MatchDetail.Chat>) getIntent().getSerializableExtra("chat");
-        listView = (ListView)findViewById(R.id.list_chat);
-        listView.setAdapter(new ChatAdapter(this,chats));
+        chats = getIntent().getParcelableExtra("chat");
+        recyclerView =  findViewById(R.id.recycler_chat);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        recyclerView.setAdapter(new ChatAdapter(this, chats));
     }
 
     @Override

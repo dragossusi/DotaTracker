@@ -1,12 +1,8 @@
 package com.rachierudragos.dotatracker;
 
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
@@ -24,26 +20,30 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.rachierudragos.dotatracker.Fragments.HeroesFragment;
-import com.rachierudragos.dotatracker.Fragments.MatchesFragment;
-import com.rachierudragos.dotatracker.Wrapper.ODotaAPI;
+import com.rachierudragos.dotatracker.Wrapper.ODotaAPI2;
+import com.rachierudragos.dotatracker.heroes.HeroesFragment;
+import com.rachierudragos.dotatracker.matches.MatchesFragment;
 import com.rachierudragos.dotatracker.Wrapper.account.AccountDetail;
+import com.rachierudragos.dotatracker.vars.App;
+import com.rachierudragos.dotatracker.vars.Utils;
+import com.squareup.picasso.Picasso;
 
-import org.apache.http.HttpStatus;
-
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private FragmentManager fm;
-    public static ODotaAPI api;
-    private static long ID;
-    private static int matches_number;
+    int id;
+    int matchesNumber;
     private View header;
-    SharedPreferences preference;
     AccountDetail accountDetail;
+    private TextView textNume;
+    private TextView textMmrp;
+    private TextView textMmrs;
+    private ImageView imgPoza;
+    ODotaAPI2 api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,60 +62,49 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         header = navigationView.getHeaderView(0);
 
+        imgPoza = header.findViewById(R.id.img_acc);
+        textMmrs = header.findViewById(R.id.text_mmrs);
+        textMmrp = header.findViewById(R.id.text_mmrp);
+        textNume = header.findViewById(R.id.txt_nume);
+
+        api = ((App) getApplication()).getApi();
+
         //generat de ei
-        api = new ODotaAPI();
         fm = getFragmentManager();
-        preference = PreferenceManager.getDefaultSharedPreferences(this);
-        ID = preference.getLong("idd",0);
-        matches_number = preference.getInt("matches_number",15);
-        if(ID==0) {
+        id = Utils.getId();
+        matchesNumber = Utils.getMatchesNumber();
+        if (id == 0) {
             dialogID();
-        }
-        else {
-            if(userdetails())
-                fm.beginTransaction().replace(R.id.content_main, new MatchesFragment()).commit();
-            else
-                dialogID();
+        } else {
+            userdetails();
         }
     }
 
-    public static int getMatches_number() {
-        return matches_number;
-    }
 
-    private boolean userdetails() {
-        ImageView ivpoza = (ImageView) header.findViewById(R.id.img_acc);
-        TextView tvmmrs = (TextView) header.findViewById(R.id.text_mmrs);
-        TextView tvmmrp = (TextView) header.findViewById(R.id.text_mmrp);
-        TextView tvnume = (TextView) header.findViewById(R.id.txt_nume);
-        final boolean[] aMers = new boolean[1];
-        Thread t = new Thread(new Runnable() {
+    private void userdetails() {
+        Call<AccountDetail> call = api.getPlayer(id);
+        call.enqueue(new Callback<AccountDetail>() {
             @Override
-            public void run() {
-                try {
-                    accountDetail = api.getPlayer(ID);
-                    aMers[0] = true;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    aMers[0] = false;
+            public void onResponse(Call<AccountDetail> call, Response<AccountDetail> response) {
+                if (response.body().tracked_until != null) {
+                    textMmrs.setText(accountDetail.solo_competitive_rank);
+                    textMmrp.setText(accountDetail.competitive_rank);
+                    textNume.setText(accountDetail.profile.personaname);
+                    Picasso.with(MainActivity.this)
+                            .load(accountDetail.profile.avatarfull)
+                            .into(imgPoza);
+                    fm.beginTransaction().replace(R.id.content_main, new MatchesFragment()).commit();
+                } else {
+                    Toast.makeText(MainActivity.this, "ID can't be parsed", Toast.LENGTH_LONG).show();
+                    dialogID();
                 }
             }
-        });
-        t.start();
-        try {
-            t.join();
-            if(aMers[0]) {
-                tvmmrs.setText(accountDetail.solo_competitive_rank);
-                tvmmrp.setText(accountDetail.competitive_rank);
-                tvnume.setText(accountDetail.profile.personaname);
-                new ImageDownloaderTask(ivpoza, accountDetail.profile.avatarfull, this).execute(accountDetail.profile.avatarfull);
-            } else {
-                Toast.makeText(this,"ID can't be parsed",Toast.LENGTH_LONG).show();
+
+            @Override
+            public void onFailure(Call<AccountDetail> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Weird error", Toast.LENGTH_LONG).show();
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return aMers[0];
+        });
     }
 
     @Override
@@ -147,15 +136,11 @@ public class MainActivity extends AppCompatActivity
             dialogID();
             return true;
         }
-        if(id ==R.id.action_matches_number) {
+        if (id == R.id.action_matches_number) {
             dialogMatchesNumber();
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public static long getID() {
-        return ID;
     }
 
     private void dialogID() {
@@ -168,13 +153,9 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (!editText.getText().toString().equals("")) {
-                            ID = Long.parseLong(editText.getText().toString());
-                            SharedPreferences.Editor editor = preference.edit();
-                            editor.putLong("idd", ID).commit();
-                            if(userdetails())
-                                fm.beginTransaction().replace(R.id.content_main, new MatchesFragment()).commit();
-                            else
-                                dialogID();
+                            id = Integer.parseInt(editText.getText().toString());
+                            Utils.putId(id);
+                            userdetails();
                         }
                     }
                 });
@@ -191,14 +172,13 @@ public class MainActivity extends AppCompatActivity
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (!editText.getText().toString().equals("")) {
                             int nr = Integer.parseInt(editText.getText().toString());
-                            if(nr<50)
-                                matches_number = nr;
+                            if (nr < 50)
+                                matchesNumber = nr;
                             else {
-                                matches_number = 50;
-                                Toast.makeText(MainActivity.this,"Maximum number of recent matches is 50",Toast.LENGTH_SHORT).show();
+                                matchesNumber = 50;
+                                Toast.makeText(MainActivity.this, "Maximum number of recent matches is 50", Toast.LENGTH_SHORT).show();
                             }
-                            SharedPreferences.Editor editor = preference.edit();
-                            editor.putInt("matches_number", matches_number).commit();
+                            Utils.putMatchesNumber(matchesNumber);
                         }
                     }
                 });
@@ -229,60 +209,5 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    private class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView imageView;
-        private Context context;
-        private String url;
-
-        public ImageDownloaderTask(ImageView imageView, String url, Context context) {
-            this.imageView = imageView;
-            this.url = url;
-            this.context = context;
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... params) {
-
-            return downloadBitmap(params[0]);
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            imageView.setImageBitmap(bitmap);
-        }
-
-        private Bitmap downloadBitmap(String url) {
-            HttpURLConnection urlConnection = null;
-            try {
-                URL uri = new URL(url);
-                urlConnection = (HttpURLConnection) uri.openConnection();
-
-                int statusCode = urlConnection.getResponseCode();
-                if (statusCode != HttpStatus.SC_OK) {
-                    return null;
-                }
-
-                InputStream inputStream = urlConnection.getInputStream();
-                if (inputStream != null) {
-
-                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    return bitmap;
-                }
-            } catch (Exception e) {
-                System.out.println("URLCONNECTIONERROR" + e.toString());
-                if (urlConnection != null) {
-                    urlConnection.disconnect();
-                }
-                System.out.println("ImageDownloader Error downloading image from " + url);
-            } finally {
-                if (urlConnection != null) {
-                    urlConnection.disconnect();
-
-                }
-            }
-            return null;
-        }
     }
 }

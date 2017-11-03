@@ -17,4 +17,5 @@
     <string name="title_match_list">Players</string>
     <string name="title_match_detail">Player Detail</string>
     <string name="title_graphs">Graphics</string>
+    <string name="error_id">Bad id</string>
 </resources>

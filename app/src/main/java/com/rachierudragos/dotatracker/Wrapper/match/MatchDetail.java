@@ -1,177 +1,129 @@
 package com.rachierudragos.dotatracker.Wrapper.match;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public class MatchDetail implements Serializable {
-	public long match_id;
-	public int barracks_status_dire;
-	public int barracks_status_radiant;
-	public List<Chat> chat;
-	public int cluster;
-	public int dire_score;
-	public int duration;
-	public int engine;
-	public int first_blood_time;
-	public int game_mode;
-	public int human_players;
-	public int leagueid;
-	public int lobby_type;
-	public int negative_votes;
-	public int positive_votes;
-	public List<Integer> radiant_gold_adv;
-	public int radiant_score;
-	public boolean radiant_win;
-	public List<Integer> radiant_xp_adv;
-	public long start_time;
-	public int tower_status_dire;
-	public int tower_status_radiant;
-	public int version;
-	public long replay_salt;
-	public int series_id;
-	public int series_type;
-	public List<Player> players;
-	public int patch;
-	public int region;
-	public Map<String, Integer>all_word_counts;
-	public int comeback;
-	
-	public class Chat implements Serializable{
-		public int time;
-		public String type;
-		public String unit;
-		public String key;
-		public int slot;
-		public int player_slot;
-		public int getTime() {
-			return time;
-		}
-		public String getName() {
-			return unit;
-		}
-		public String getMessage() {
-			return key;
-		}
-	}
-	public class Player implements Serializable {
-		public long match_id;
-		public int player_slot;
-		//ability_upgrades_arr	[19]
-		//ability_uses	Object
-		public long account_id;
-		public List<Unit> additional_units;
-		public int assists;
-		public int backpack_0;
-		public int backpack_1;
-		public int backpack_2;
-		public int camps_stacked;
-		public int creeps_stacked;
-		public int deaths;
-		public int denies;
-		public int gold;
-		public int gold_per_min;
-		public int gold_spent;
-		public int hero_damage;
-		public int hero_healing;
-		public int hero_id;
-		
-		public int item_0;
-		public int item_1;
-		public int item_2;
-		public int item_3;
-		public int item_4;
-		public int item_5;
-		
-		public List<Integer> getItems() {
-			List<Integer> items = new ArrayList<>();
-			items.add(item_0);
-			items.add(item_1);
-			items.add(item_2);
-			items.add(item_3);
-			items.add(item_4);
-			items.add(item_5);
-			items.add(backpack_0);
-			items.add(backpack_1);
-			items.add(backpack_2);
-			return items;
-		}
-		
-		public Map<String, Integer> item_uses;
-		public Map<Integer, Integer> kill_streaks;
-		public Map<String, Integer> killed_by;
-		public int kills;
-		//kills_log	[17]
-		public int last_hits;
-		public int leaver_status;
-		public int level;
-		//max_hero_hit	Object
-		public Map<Integer, Integer>multi_kills;
-		public int obs_placed;
-		public int party_id;
-		//permanent_buffs	[]
-		public List<PurchaseLog> purchase_log;
-		public int rune_pickups;
-		public int sen_placed;
-		public float stuns;
-		public int tower_damage;
-		public int xp_per_min;
-		public String personaname;
-		public Date last_login;
-		public boolean radiant_win;
-		public long start_time;
-		public int duration;
-		public int cluster;
-		public int lobby_type;
-		public int game_mode;
-		public int patch;
-		public int region;
-		public boolean isRadiant;
-		public int win;
-		public int total_gold;
-		public int total_xp;
-		public float kills_per_min;
-		public float kda;
-		public int abandons;
-		public int neutral_kills;
-		public int tower_kills;
-		public int courier_kills;
-		public int hero_kills;
-		public int roshan_kills;
-		public int buyback_count;
-		public int lane_efficiency_pct;
-		public int lane;
-		public int lane_role;
-	}
-	public class Unit implements Serializable{
-		public String unitname;
-		public int item_0;
-		public int item_1;
-		public int item_2;
-		public int item_3;
-		public int item_4;
-		public int item_5;
-		public int backpack_0;
-		public int backpack_1;
-		public int backpack_2;
-		public List<Integer> getItems() {
-			List<Integer> items = new ArrayList<>();
-			items.add(item_0);
-			items.add(item_1);
-			items.add(item_2);
-			items.add(item_3);
-			items.add(item_4);
-			items.add(item_5);
-			items.add(backpack_0);
-			items.add(backpack_1);
-			items.add(backpack_2);
-			return items;
-		}
-	}
-	public class PurchaseLog implements Serializable{
-		public String key;
-		public int time;
-	}
+public class MatchDetail implements Parcelable{
+    public long match_id;
+    public int barracks_status_dire;
+    public int barracks_status_radiant;
+    public List<Chat> chat;
+    public int cluster;
+    public int dire_score;
+    public int duration;
+    public int engine;
+    public int first_blood_time;
+    public int game_mode;
+    public int human_players;
+    public int leagueid;
+    public int lobby_type;
+    public int negative_votes;
+    public int positive_votes;
+    public List<Integer> radiant_gold_adv;
+    public int radiant_score;
+    public boolean radiant_win;
+    public List<Integer> radiant_xp_adv;
+    public long start_time;
+    public int tower_status_dire;
+    public int tower_status_radiant;
+    public int version;
+    public long replay_salt;
+    public int series_id;
+    public int series_type;
+    public List<MatchPlayer> players;
+    public int patch;
+    public int region;
+    public Map<String, Integer> all_word_counts;
+    public int comeback;
+
+    public class PurchaseLog implements Serializable {
+        public String key;
+        public int time;
+    }
+
+    protected MatchDetail(Parcel in) {
+        match_id = in.readLong();
+        barracks_status_dire = in.readInt();
+        barracks_status_radiant = in.readInt();
+        chat = in.createTypedArrayList(Chat.CREATOR);
+        cluster = in.readInt();
+        dire_score = in.readInt();
+        duration = in.readInt();
+        engine = in.readInt();
+        first_blood_time = in.readInt();
+        game_mode = in.readInt();
+        human_players = in.readInt();
+        leagueid = in.readInt();
+        lobby_type = in.readInt();
+        negative_votes = in.readInt();
+        positive_votes = in.readInt();
+        radiant_score = in.readInt();
+        radiant_win = in.readByte() != 0;
+        start_time = in.readLong();
+        tower_status_dire = in.readInt();
+        tower_status_radiant = in.readInt();
+        version = in.readInt();
+        replay_salt = in.readLong();
+        series_id = in.readInt();
+        series_type = in.readInt();
+        players = in.createTypedArrayList(MatchPlayer.CREATOR);
+        patch = in.readInt();
+        region = in.readInt();
+        comeback = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(match_id);
+        dest.writeInt(barracks_status_dire);
+        dest.writeInt(barracks_status_radiant);
+        dest.writeTypedList(chat);
+        dest.writeInt(cluster);
+        dest.writeInt(dire_score);
+        dest.writeInt(duration);
+        dest.writeInt(engine);
+        dest.writeInt(first_blood_time);
+        dest.writeInt(game_mode);
+        dest.writeInt(human_players);
+        dest.writeInt(leagueid);
+        dest.writeInt(lobby_type);
+        dest.writeInt(negative_votes);
+        dest.writeInt(positive_votes);
+        dest.writeInt(radiant_score);
+        dest.writeByte((byte) (radiant_win ? 1 : 0));
+        dest.writeLong(start_time);
+        dest.writeInt(tower_status_dire);
+        dest.writeInt(tower_status_radiant);
+        dest.writeInt(version);
+        dest.writeLong(replay_salt);
+        dest.writeInt(series_id);
+        dest.writeInt(series_type);
+        dest.writeTypedList(players);
+        dest.writeInt(patch);
+        dest.writeInt(region);
+        dest.writeInt(comeback);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<MatchDetail> CREATOR = new Creator<MatchDetail>() {
+        @Override
+        public MatchDetail createFromParcel(Parcel in) {
+            return new MatchDetail(in);
+        }
+
+        @Override
+        public MatchDetail[] newArray(int size) {
+            return new MatchDetail[size];
+        }
+    };
 }

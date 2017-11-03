@@ -6,6 +6,7 @@ public class AccountDetail {
 	public String solo_competitive_rank;
 	public String competitive_rank;
 	public Profile profile;
+	public String tracked_until;
 	public class Profile{
 		public Long account_id;
 		public String personaname;

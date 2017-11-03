@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".vars.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -22,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MatchActivities.MatchListActivity"
+            android:name=".match.MatchDetailActivity"
             android:label="@string/title_match_list"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -31,23 +32,23 @@
                 android:value="com.rachierudragos.dotatracker.MainActivity" />
         </activity>
         <activity
-            android:name=".MatchActivities.MatchDetailActivity"
+            android:name=".match.detail.MatchPlayerDetailActivity"
             android:label="@string/title_match_detail"
-            android:parentActivityName=".MatchActivities.MatchListActivity"
+            android:parentActivityName=".match.MatchDetailActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.rachierudragos.dotatracker.MatchActivities.MatchListActivity" />
+                android:value="com.rachierudragos.dotatracker.match.MatchDetailActivity" />
         </activity>
         <activity
-            android:name=".MatchActivities.GraphActivity"
+            android:name=".match.GraphActivity"
             android:label="@string/title_graphs"
-            android:parentActivityName=".MatchActivities.MatchListActivity">
+            android:parentActivityName=".match.MatchDetailActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.rachierudragos.dotatracker.MatchActivities.MatchListActivity" />
+                android:value="com.rachierudragos.dotatracker.match.MatchDetailActivity" />
         </activity>
-        <activity android:name=".MatchActivities.ChatActivity"></activity>
+        <activity android:name=".match.ChatActivity"></activity>
     </application>
 
 </manifest>

@@ -3,34 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    android:baselineAligned="false"
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context="com.rachierudragos.dotatracker.MatchActivities.MatchListActivity">
+    tools:context="com.rachierudragos.dotatracker.match.MatchDetailActivity">
 
-    <!--
-    This layout is a two-pane layout for the Matches
-    master/detail flow.
-    
-    -->
 
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:paddingTop="@dimen/padding_overlap"
+        android:paddingBottom="@dimen/padding_overlap"
+        android:clipToPadding="false"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/match_list"
         android:name="com.rachierudragos.dotatracker.MatchListFragment"
-        android:layout_width="@dimen/item_width"
-        android:layout_height="match_parent"
-        app:layoutManager="LinearLayoutManager"
-        tools:context="com.rachierudragos.dotatracker.MatchActivities.MatchListActivity"
-        tools:listitem="@layout/match_list_content" />
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:scrollbars="none"
+        app:elevation="@dimen/recycler_elevation"
+        tools:context="com.rachierudragos.dotatracker.match.MatchDetailActivity"
+        tools:listitem="@layout/item_match_hero"
+        android:overScrollMode="never"/>
 
     <FrameLayout
         android:id="@+id/match_detail_container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="3" />
+        android:layout_margin="@dimen/margin_cardview"
+        android:layout_weight="2" />
 
 </LinearLayout>

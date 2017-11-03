@@ -1,4 +1,4 @@
-package com.rachierudragos.dotatracker.MatchActivities;
+package com.rachierudragos.dotatracker.match.detail;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -6,23 +6,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.rachierudragos.dotatracker.Fragments.MatchDetailFragment;
+import com.rachierudragos.dotatracker.Wrapper.match.MatchPlayer;
+import com.rachierudragos.dotatracker.match.MatchDetailActivity;
 import com.rachierudragos.dotatracker.R;
-import com.rachierudragos.dotatracker.Wrapper.match.MatchDetail;
 
 /**
  * An activity representing a single Match detail screen. This
  * activity is only used narrow width devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
- * in a {@link MatchListActivity}.
+ * in a {@link MatchDetailActivity}.
  */
-public class MatchDetailActivity extends AppCompatActivity {
-    private MatchDetail.Player player;
+public class MatchPlayerDetailActivity extends AppCompatActivity {
+    private MatchPlayer player;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_detail);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+        Toolbar toolbar = findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
         System.out.println("o pornit fragmentarea");
         // Show the Up button in the action bar.
@@ -43,9 +43,9 @@ public class MatchDetailActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
-            player =(MatchDetail.Player) getIntent().getSerializableExtra("player");
+            player =(MatchPlayer) getIntent().getSerializableExtra("player");
             Bundle arguments = new Bundle();
-            arguments.putSerializable("player",player);
+            arguments.putParcelable("player",player);
             MatchDetailFragment fragment = new MatchDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
@@ -64,7 +64,7 @@ public class MatchDetailActivity extends AppCompatActivity {
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            //navigateUpTo(new Intent(this, MatchListActivity.class));
+            //navigateUpTo(new Intent(this, MatchDetailActivity.class));
             finish();
             return true;
         }

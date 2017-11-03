@@ -12,30 +12,22 @@
             android:text="Persona Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/chat_person"
+            android:id="@+id/text_chat_person"
             android:textAppearance="@android:style/TextAppearance.Material.Small" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/chat_minute"
+            android:id="@+id/text_chat_when"
             android:textAppearance="@android:style/TextAppearance.Material.Small"
-            android:layout_below="@+id/chat_person"
-            android:layout_alignParentStart="true"
-            android:layout_toStartOf="@+id/chat_message"
-            android:text="Time"
-            android:layout_alignEnd="@+id/chat_person" />
+            android:text="Time" />
     </LinearLayout>
 
     <TextView
         android:text="Message"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/chat_message"
+        android:id="@+id/text_chat_message"
         android:textAppearance="@android:style/TextAppearance.Material.Small"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
         android:gravity="right|center" />
 </LinearLayout>

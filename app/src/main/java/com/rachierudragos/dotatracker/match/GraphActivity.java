@@ -1,4 +1,4 @@
-package com.rachierudragos.dotatracker.MatchActivities;
+package com.rachierudragos.dotatracker.match;
 
 import android.graphics.Color;
 import android.os.Bundle;
