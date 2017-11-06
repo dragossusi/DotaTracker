@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:elevation="@dimen/elevation_default">
 
     <ImageView
         android:id="@+id/playerhero"
@@ -15,7 +16,7 @@
         android:id="@+id/id_player_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        style="@style/TextView.Primary"
         android:gravity="center"
-        android:text="Iddd"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:text="Iddd"/>
 </LinearLayout>

@@ -1,8 +1,8 @@
-package com.rachierudragos.dotatracker.matches;
+package com.rachierudragos.dotatracker.previews;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rachierudragos.dotatracker.R;
-import com.rachierudragos.dotatracker.Wrapper.hero.HeroDatabase;
+import com.rachierudragos.dotatracker.Wrapper.database.HeroDatabase;
 import com.rachierudragos.dotatracker.Wrapper.match.MatchPreview;
 import com.rachierudragos.dotatracker.match.MatchDetailActivity;
 
@@ -23,8 +23,8 @@ import java.util.List;
 
 public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ItemHolder> {
 
-    Context context;
-    List<MatchPreview> matches;
+    protected Context context;
+    protected List<MatchPreview> matches;
 
     public MatchAdapter(Context context, List<MatchPreview> matches) {
         this.context = context;
@@ -53,10 +53,10 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ItemHolder> 
         });
         if (match.hasWon()) {
             holder.textWin.setText("Win");
-            holder.textWin.setTextColor(Color.GREEN);
+            holder.textWin.setTextColor(ContextCompat.getColor(context,R.color.green));
         } else {
             holder.textWin.setText("Lost");
-            holder.textWin.setTextColor(Color.RED);
+            holder.textWin.setTextColor(ContextCompat.getColor(context,R.color.red));
         }
         holder.textDuration.setText(match.getDurationText());
     }

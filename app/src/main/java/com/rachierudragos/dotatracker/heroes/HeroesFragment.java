@@ -33,11 +33,13 @@ public class HeroesFragment extends Fragment {
     private View rootView;
     private int id;
     ODotaAPI2 api;
+    ProgressBar pb;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_heroes, container, false);
         recyclerView = rootView.findViewById(R.id.recycler_heroes);
+        pb = rootView.findViewById(R.id.progressBar);
         id = Utils.getId();
         api = ((App)getActivity().getApplication()).getApi();
         Call<List<HeroDetail>> heroDetails = api.getHeroDetails(id,new MatchesFilter().getFilter());
@@ -47,7 +49,6 @@ public class HeroesFragment extends Fragment {
                 recyclerView.setAdapter(new HeroAdapter(getActivity(),response.body()));//TODO
                 recyclerView.setVisibility(View.VISIBLE);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-                ProgressBar pb = (ProgressBar) rootView.findViewById(R.id.progressBar);
                 pb.setVisibility(View.GONE);
             }
 

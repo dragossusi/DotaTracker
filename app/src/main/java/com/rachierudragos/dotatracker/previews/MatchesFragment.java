@@ -1,10 +1,11 @@
-package com.rachierudragos.dotatracker.matches;
+package com.rachierudragos.dotatracker.previews;
 
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.rachierudragos.dotatracker.vars.App;
-import com.rachierudragos.dotatracker.MainActivity;
 import com.rachierudragos.dotatracker.R;
 import com.rachierudragos.dotatracker.Wrapper.ODotaAPI2;
 import com.rachierudragos.dotatracker.Wrapper.filter.MatchesFilter;
@@ -49,7 +49,12 @@ public class MatchesFragment extends Fragment {
             @Override
             public void onResponse(Call<List<MatchPreview>> call, Response<List<MatchPreview>> response) {
                 Log.d("url", call.request().url().toString());
-                recyclerView.setAdapter(new MatchAdapter(getActivity(), response.body()));
+                DisplayMetrics displayMetrics = getActivity().getResources().getDisplayMetrics();
+                float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+                if(dpWidth<900)
+                    recyclerView.setAdapter(new MatchAdapter(getActivity(), response.body()));
+                else
+                    recyclerView.setAdapter(new MatchLargeScreenAdapter(getActivity(),response.body()));
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                 ProgressBar pb = rootView.findViewById(R.id.progressBar);
                 pb.setVisibility(View.GONE);

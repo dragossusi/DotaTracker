@@ -2,19 +2,18 @@ package com.rachierudragos.dotatracker.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.rachierudragos.dotatracker.R;
-import com.rachierudragos.dotatracker.Wrapper.hero.HeroDatabase;
+import com.rachierudragos.dotatracker.Wrapper.database.HeroDatabase;
 import com.rachierudragos.dotatracker.Wrapper.match.MatchPlayer;
 import com.rachierudragos.dotatracker.match.detail.MatchDetailFragment;
 import com.rachierudragos.dotatracker.match.detail.MatchPlayerDetailActivity;
@@ -51,9 +50,9 @@ public class MatchHeroAdapter extends RecyclerView.Adapter<MatchHeroAdapter.Item
         else
             holder.mIdView.setText("Unknown");
         if (position < 5) {
-            holder.itemView.setBackgroundColor(Color.GREEN);
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(context,R.color.green));
         } else {
-            holder.itemView.setBackgroundColor(Color.RED);
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(context,R.color.red));
         }
         holder.mContentView.setImageResource(context.getResources().getIdentifier(HeroDatabase.getHeroIdName(player.hero_id), "drawable", context.getPackageName()));
 

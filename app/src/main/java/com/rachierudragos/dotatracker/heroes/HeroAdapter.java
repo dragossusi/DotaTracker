@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.rachierudragos.dotatracker.R;
 import com.rachierudragos.dotatracker.vars.Utils;
-import com.rachierudragos.dotatracker.Wrapper.hero.HeroDatabase;
+import com.rachierudragos.dotatracker.Wrapper.database.HeroDatabase;
 import com.rachierudragos.dotatracker.Wrapper.hero.HeroDetail;
 
 import java.util.List;
@@ -65,7 +65,7 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.ItemHolder> {
                 builder.show();
             }
         });
-        holder.imgHero.setImageResource(context.getResources().getIdentifier(HeroDatabase.getHeroIdName(heroDetail.hero_id), "drawable", context.getPackageName()));
+        holder.imgHero.setImageResource(Utils.getPhotoResId(context,heroDetail.hero_id));
         holder.textHeroName.setText(HeroDatabase.getHeroName(heroDetail.hero_id));
         holder.textGames.setText(String.valueOf(heroDetail.games));
     }

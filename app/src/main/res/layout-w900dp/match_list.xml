@@ -10,29 +10,24 @@
 
 
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:paddingTop="@dimen/padding_overlap"
-        android:paddingBottom="@dimen/padding_overlap"
-        android:clipToPadding="false"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/match_list"
-        android:name="com.rachierudragos.dotatracker.MatchListFragment"
         android:layout_width="0dip"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_weight="1"
-        android:background="@android:color/transparent"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingBottom="@dimen/padding_overlap"
+        android:paddingTop="@dimen/padding_overlap"
         android:scrollbars="none"
-        app:elevation="@dimen/recycler_elevation"
-        tools:context="com.rachierudragos.dotatracker.match.MatchDetailActivity"
-        tools:listitem="@layout/item_match_hero"
-        android:overScrollMode="never"/>
+        tools:listitem="@layout/item_match_hero" />
 
     <FrameLayout
         android:id="@+id/match_detail_container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/margin_cardview"
         android:layout_weight="2" />
 
 </LinearLayout>

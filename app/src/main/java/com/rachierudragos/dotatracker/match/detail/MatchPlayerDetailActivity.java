@@ -5,10 +5,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.rachierudragos.dotatracker.Wrapper.match.MatchPlayer;
 import com.rachierudragos.dotatracker.match.MatchDetailActivity;
 import com.rachierudragos.dotatracker.R;
+import com.rachierudragos.dotatracker.vars.Utils;
 
 /**
  * An activity representing a single Match detail screen. This
@@ -18,6 +20,7 @@ import com.rachierudragos.dotatracker.R;
  */
 public class MatchPlayerDetailActivity extends AppCompatActivity {
     private MatchPlayer player;
+    ImageView imgHero;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +46,10 @@ public class MatchPlayerDetailActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
-            player =(MatchPlayer) getIntent().getSerializableExtra("player");
+            player = getIntent().getParcelableExtra("player");
+
+            imgHero = findViewById(R.id.image_hero);
+            imgHero.setImageResource(Utils.getPhotoResId(this,player.hero_id));
             Bundle arguments = new Bundle();
             arguments.putParcelable("player",player);
             MatchDetailFragment fragment = new MatchDetailFragment();
@@ -52,6 +58,10 @@ public class MatchPlayerDetailActivity extends AppCompatActivity {
                     .add(R.id.match_detail_container, fragment)
                     .commit();
         }
+    }
+
+    public MatchPlayer getPlayer() {
+        return player;
     }
 
     @Override

@@ -10,4 +10,11 @@
         android:layout_height="match_parent"
         tools:listitem="@layout/item_hero"
         android:id="@+id/recycler_heroes" />
+    
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:indeterminate="true"/>
 </LinearLayout>

@@ -14,7 +14,8 @@ import com.rachierudragos.dotatracker.Wrapper.match.MatchPlayer;
 import com.rachierudragos.dotatracker.match.MatchDetailActivity;
 import com.rachierudragos.dotatracker.R;
 import com.rachierudragos.dotatracker.Wrapper.ItemDetail;
-import com.rachierudragos.dotatracker.Wrapper.hero.HeroDatabase;
+import com.rachierudragos.dotatracker.Wrapper.database.HeroDatabase;
+import com.rachierudragos.dotatracker.vars.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +33,11 @@ public class MatchDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments().containsKey("player")) {
-            mItem = ((MatchDetailActivity) getActivity()).getMatchDetail().players.get(getArguments().getInt("player"));
-
+        if (getArguments().containsKey("player") && mItem==null) {
+            if(getActivity() instanceof MatchDetailActivity)
+                mItem = ((MatchDetailActivity) getActivity()).getMatchDetail().players.get(getArguments().getInt("player"));
+            else
+                mItem = ((MatchPlayerDetailActivity)getActivity()).getPlayer();
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {

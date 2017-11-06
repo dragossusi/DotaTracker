@@ -1,11 +1,14 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/backgroundDefault</item>
+        <item name="android:textColorPrimaryInverse">?android:attr/textColorSecondaryInverse</item>
+        <item name="android:textColorPrimary">@color/textDefault</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -16,5 +19,28 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="CardView.Dark" parent="CardView">
+        <item name="cardElevation">4dp</item>
+        <item name="cardBackgroundColor">@color/cardView.Dark</item>
+    </style>
+
+    <style name="CardView.Light" parent="CardView">
+        <item name="cardElevation">4dp</item>
+        <item name="cardBackgroundColor">@color/cardView.Light</item>
+    </style>
+
+    <style name="TextView.HeroName" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/textDefault</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+    <style name="TextView.Secondary" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/textGray</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+    <style name="TextView.Primary" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/textWhite</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
 
 </resources>

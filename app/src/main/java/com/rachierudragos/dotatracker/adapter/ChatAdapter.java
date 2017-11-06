@@ -3,6 +3,7 @@ package com.rachierudragos.dotatracker.adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,9 +41,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ItemHolder> {
         Chat chat = chats.get(position);
         holder.textPerson.setText(chat.getName());
         if (chat.slot < 5)
-            holder.textPerson.setTextColor(Color.GREEN);
+            holder.textPerson.setTextColor(ContextCompat.getColor(context,R.color.green));
         else
-            holder.textPerson.setTextColor(Color.RED);
+            holder.textPerson.setTextColor(ContextCompat.getColor(context,R.color.red));
         holder.textMessage.setText(chat.getMessage());
         String text = "";
         int time = chat.getTime();

@@ -1,4 +1,4 @@
-package com.rachierudragos.dotatracker.Wrapper.hero;
+package com.rachierudragos.dotatracker.Wrapper.database;
 
 public class HeroDatabase {
 	private static final String[] idnames={"antimage","axe","bane","bloodseeker","crystal_maiden","drow_ranger","earthshaker",

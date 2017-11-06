@@ -2,9 +2,7 @@ package com.rachierudragos.dotatracker;
 
 import android.app.FragmentManager;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +21,7 @@ import android.widget.Toast;
 
 import com.rachierudragos.dotatracker.Wrapper.ODotaAPI2;
 import com.rachierudragos.dotatracker.heroes.HeroesFragment;
-import com.rachierudragos.dotatracker.matches.MatchesFragment;
+import com.rachierudragos.dotatracker.previews.MatchesFragment;
 import com.rachierudragos.dotatracker.Wrapper.account.AccountDetail;
 import com.rachierudragos.dotatracker.vars.App;
 import com.rachierudragos.dotatracker.vars.Utils;
@@ -86,7 +85,9 @@ public class MainActivity extends AppCompatActivity
         call.enqueue(new Callback<AccountDetail>() {
             @Override
             public void onResponse(Call<AccountDetail> call, Response<AccountDetail> response) {
-                if (response.body().tracked_until != null) {
+                Log.d("acc",call.request().url().toString());
+                accountDetail = response.body();
+                if (accountDetail.profile != null) {
                     textMmrs.setText(accountDetail.solo_competitive_rank);
                     textMmrp.setText(accountDetail.competitive_rank);
                     textNume.setText(accountDetail.profile.personaname);
