@@ -51,7 +51,6 @@ public class MatchPlayerDetailActivity extends AppCompatActivity {
             imgHero = findViewById(R.id.image_hero);
             imgHero.setImageResource(Utils.getPhotoResId(this,player.hero_id));
             Bundle arguments = new Bundle();
-            arguments.putParcelable("player",player);
             MatchDetailFragment fragment = new MatchDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()

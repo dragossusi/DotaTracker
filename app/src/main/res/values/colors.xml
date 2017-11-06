@@ -3,10 +3,15 @@
     <color name="colorPrimary">#1f1f2b</color>
     <color name="colorPrimaryDark">#12131a</color>
     <color name="colorAccent">#69bcfc</color>
+
     <color name="despartit">#3e362c</color>
+
     <color name="backgroundDefault">#2e2f3f</color>
+    <color name="navigation">@color/colorPrimaryDark</color>
+
     <color name="cardView.Dark">#2d2e3e</color>
     <color name="cardView.Light">#3e3f52</color>
+
     <color name="textDefault">#69bcfc</color>
     <color name="textWhite">#f5f5f5</color>
     <color name="textGray">@color/gray</color>
@@ -14,4 +19,11 @@
     <color name="green">#69b970</color>
     <color name="red">#fd4d51</color>
     <color name="gray">#b2b2b2</color>
+
+    <color name="pressed_color">#44000000</color>
+    <color name="selected_color">#33000000</color>
+    <color name="focused_color">#22000000</color>
+
+    <color name="translucent_scrim_bottom">#c8000000</color>
+    <color name="translucent_scrim_bottom_center">#19000000</color>
 </resources>

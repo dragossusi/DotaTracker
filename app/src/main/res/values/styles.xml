@@ -9,6 +9,8 @@
         <item name="android:colorBackground">@color/backgroundDefault</item>
         <item name="android:textColorPrimaryInverse">?android:attr/textColorSecondaryInverse</item>
         <item name="android:textColorPrimary">@color/textDefault</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:navigationBarColor">@color/navigation</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -20,27 +22,33 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="CardView.Dark" parent="CardView">
-        <item name="cardElevation">4dp</item>
-        <item name="cardBackgroundColor">@color/cardView.Dark</item>
+    <style name="CardView.Base" parent="CardView">
+        <item name="cardElevation">@dimen/elevation_default</item>
+        <item name="cardBackgroundColor">@color/cardView.Light</item>
     </style>
 
-    <style name="CardView.Light" parent="CardView">
-        <item name="cardElevation">4dp</item>
-        <item name="cardBackgroundColor">@color/cardView.Light</item>
+    <style name="CardView.Margin" parent="CardView.Base">
+        <item name="cardCornerRadius">4dp</item>
+        <item name="android:layout_margin">@dimen/margin_cardview</item>
     </style>
 
     <style name="TextView.HeroName" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/textDefault</item>
         <item name="android:textSize">@dimen/text_size_large</item>
     </style>
+
     <style name="TextView.Secondary" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/textGray</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
+
     <style name="TextView.Primary" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/textWhite</item>
         <item name="android:textSize">@dimen/text_size_large</item>
     </style>
 
+    <style name="AlertDialog.Heroes" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/backgroundDefault</item>
+        <item name="android:textColor">@color/textDefault</item>
+    </style>
 </resources>

@@ -18,4 +18,8 @@
     <string name="title_match_detail">Player Detail</string>
     <string name="title_graphs">Graphics</string>
     <string name="error_id">Bad id</string>
+    <string name="hero_image_transition">heroImgTransition</string>
+
+    <string name="format_KDA">%d/%d/%d</string>
+    <string name="format_LHDN">%d/%d</string>
 </resources>

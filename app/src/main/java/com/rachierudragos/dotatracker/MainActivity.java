@@ -1,6 +1,7 @@
 package com.rachierudragos.dotatracker;
 
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;

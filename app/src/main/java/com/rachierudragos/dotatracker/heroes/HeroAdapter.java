@@ -44,7 +44,7 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.ItemHolder> {
             public void onClick(View view) {
                 System.out.println("a dat click pe erou");
                 HeroDetail heroDetail= heroDetails.get(position);
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.AlertDialog_Heroes);
                 final View dialog = LayoutInflater.from(context).inflate(R.layout.dialog_hero, null);
                 float winrate = (heroDetail.win * 100.f) / heroDetail.games;
                 TextView wrate = (TextView) dialog.findViewById(R.id.winrate);
@@ -61,8 +61,8 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.ItemHolder> {
                 ((TextView)dialog.findViewById(R.id.against_wins)).setText(String.valueOf(heroDetail.against_win));
                 //LinearLayout
                 builder.setView(dialog)
-                        .setTitle(HeroDatabase.getHeroName(heroDetail.hero_id));
-                builder.show();
+                        .setTitle(HeroDatabase.getHeroName(heroDetail.hero_id))
+                        .show();
             }
         });
         holder.imgHero.setImageResource(Utils.getPhotoResId(context,heroDetail.hero_id));

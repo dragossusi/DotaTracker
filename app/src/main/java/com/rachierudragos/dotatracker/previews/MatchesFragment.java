@@ -1,6 +1,7 @@
 package com.rachierudragos.dotatracker.previews;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,30 +43,34 @@ public class MatchesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_matches, container, false);
         recyclerView = rootView.findViewById(R.id.recycler_items);
+        return rootView;
+    }
+
+    @Override
+    public void onAttach(final Context context) {
+        super.onAttach(context);
         id = Utils.getId();
-        api = ((App) getActivity().getApplication()).getApi();
+        api = ((App) context.getApplicationContext()).getApi();
         Call<List<MatchPreview>> matchesPreviews = api.getMatchesPreviews(id, new MatchesFilter().setLimit(Utils.getMatchesNumber()).getFilter());
         matchesPreviews.enqueue(new Callback<List<MatchPreview>>() {
             @Override
             public void onResponse(Call<List<MatchPreview>> call, Response<List<MatchPreview>> response) {
                 Log.d("url", call.request().url().toString());
-                DisplayMetrics displayMetrics = getActivity().getResources().getDisplayMetrics();
+                DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
                 float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
                 if(dpWidth<900)
-                    recyclerView.setAdapter(new MatchAdapter(getActivity(), response.body()));
+                    recyclerView.setAdapter(new MatchAdapter(context, response.body()));
                 else
-                    recyclerView.setAdapter(new MatchLargeScreenAdapter(getActivity(),response.body()));
-                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+                    recyclerView.setAdapter(new MatchLargeScreenAdapter(context,response.body()));
+                recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
                 ProgressBar pb = rootView.findViewById(R.id.progressBar);
                 pb.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<List<MatchPreview>> call, Throwable t) {
-                Toast.makeText(getActivity(), R.string.error_id, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.error_id, Toast.LENGTH_SHORT).show();
             }
         });
-        return rootView;
     }
-
 }

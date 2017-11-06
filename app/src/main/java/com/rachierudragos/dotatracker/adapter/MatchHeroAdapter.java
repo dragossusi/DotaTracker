@@ -1,11 +1,16 @@
 package com.rachierudragos.dotatracker.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Slide;
+import android.transition.TransitionInflater;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +34,7 @@ public class MatchHeroAdapter extends RecyclerView.Adapter<MatchHeroAdapter.Item
     Context context;
     boolean mTwoPane;
     private List<MatchPlayer> players;
+    private int selectPosition = -1;
 
     public MatchHeroAdapter(Context context, List<MatchPlayer> players, boolean mTwoPane) {
         this.players = players;
@@ -45,16 +51,17 @@ public class MatchHeroAdapter extends RecyclerView.Adapter<MatchHeroAdapter.Item
     @Override
     public void onBindViewHolder(final ItemHolder holder, final int position) {
         final MatchPlayer player = players.get(position);
+        holder.itemView.setSelected(false);
         if (player.personaname != null)
-            holder.mIdView.setText(player.personaname);
+            holder.textName.setText(player.personaname);
         else
-            holder.mIdView.setText("Unknown");
+            holder.textName.setText("Unknown");
         if (position < 5) {
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(context,R.color.green));
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.green));
         } else {
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(context,R.color.red));
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.red));
         }
-        holder.mContentView.setImageResource(context.getResources().getIdentifier(HeroDatabase.getHeroIdName(player.hero_id), "drawable", context.getPackageName()));
+        holder.imageHero.setImageResource(context.getResources().getIdentifier(HeroDatabase.getHeroIdName(player.hero_id), "drawable", context.getPackageName()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,16 +71,27 @@ public class MatchHeroAdapter extends RecyclerView.Adapter<MatchHeroAdapter.Item
                     arguments.putInt("player", position);
                     MatchDetailFragment fragment = new MatchDetailFragment();
                     fragment.setArguments(arguments);
-                    ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.match_detail_container, fragment)
+                    fragment.setEnterTransition(new Slide(Gravity.BOTTOM));
+                    fragment.setExitTransition(new Slide(Gravity.RIGHT));
+                    ((AppCompatActivity) context).getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.match_detail_container, fragment,"heroDetail")
                             .commit();
+                    notifyItemChanged(selectPosition);
+                    holder.itemView.setSelected(true);
+                    selectPosition=position;
                 } else {
                     Intent intent = new Intent(context, MatchPlayerDetailActivity.class);
                     intent.putExtra("player", player);
-                    context.startActivity(intent);
+                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context,holder.imageHero,context.getString(R.string.hero_image_transition));
+                    context.startActivity(intent,options.toBundle());
                 }
             }
         });
+    }
+
+    public void deselect() {
+        notifyItemChanged(selectPosition);
     }
 
     @Override
@@ -83,13 +101,13 @@ public class MatchHeroAdapter extends RecyclerView.Adapter<MatchHeroAdapter.Item
 
     public class ItemHolder extends RecyclerView.ViewHolder {
 
-        public final TextView mIdView;
-        public final ImageView mContentView;
+        public final TextView textName;
+        public final ImageView imageHero;
 
         public ItemHolder(View view) {
             super(view);
-            mIdView = view.findViewById(R.id.id_player_detail);
-            mContentView = view.findViewById(R.id.playerhero);
+            textName = view.findViewById(R.id.id_player_detail);
+            imageHero = view.findViewById(R.id.playerhero);
         }
     }
 }

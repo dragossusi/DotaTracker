@@ -3,6 +3,7 @@ package com.rachierudragos.dotatracker.match;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -58,26 +59,40 @@ public class MatchDetailActivity extends AppCompatActivity {
         context = this;
         Intent intentAnt = getIntent();
         match_id = intentAnt.getLongExtra("match_id", 0);
-        api = ((App) getApplication()).getApi();
-        Call<MatchDetail> call = api.getMatch(match_id);
-        call.enqueue(new Callback<MatchDetail>() {
-            @Override
-            public void onResponse(Call<MatchDetail> call, Response<MatchDetail> response) {
-                matchDetail = response.body();
-                recyclerView.setNestedScrollingEnabled(false);
-                recyclerView.setLayoutManager(new LinearLayoutManager(MatchDetailActivity.this, LinearLayoutManager.VERTICAL, false));
-                recyclerView.setAdapter(new MatchHeroAdapter(MatchDetailActivity.this, matchDetail.players, findViewById(R.id.match_detail_container) != null));
-            }
+        if (matchDetail == null) {
+            api = ((App) getApplication()).getApi();
+            Call<MatchDetail> call = api.getMatch(match_id);
+            call.enqueue(new Callback<MatchDetail>() {
+                @Override
+                public void onResponse(Call<MatchDetail> call, Response<MatchDetail> response) {
+                    matchDetail = response.body();
+                    recyclerView.setNestedScrollingEnabled(false);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(MatchDetailActivity.this, LinearLayoutManager.VERTICAL, false));
+                    recyclerView.setAdapter(new MatchHeroAdapter(MatchDetailActivity.this, matchDetail.players, findViewById(R.id.match_detail_container) != null));
+                }
 
-            @Override
-            public void onFailure(Call<MatchDetail> call, Throwable t) {
-                Toast.makeText(MatchDetailActivity.this, "Match not working or no network connection", Toast.LENGTH_LONG).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<MatchDetail> call, Throwable t) {
+                    Toast.makeText(MatchDetailActivity.this, "Match not working or no network connection", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
     }
 
     public MatchDetail getMatchDetail() {
         return matchDetail;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("match", matchDetail);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        matchDetail = savedInstanceState.getParcelable("match");
     }
 
     @Override
