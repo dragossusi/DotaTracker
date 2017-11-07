@@ -70,8 +70,8 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/margin_little"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/text_duration"
@@ -81,12 +81,14 @@
                 android:layout_weight="1"
                 android:gravity="start|center"
                 android:text="Duration" />
+
             <TextView
                 android:id="@+id/text_when"
+                style="@style/TextView.Secondary"
                 android:layout_width="match_parent"
                 android:layout_height="0dip"
                 android:layout_weight="1"
-                android:text="yesterday"/>
+                android:text="yesterday" />
         </LinearLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>

@@ -1,5 +1,6 @@
 package com.rachierudragos.dotatracker.match.detail;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -73,8 +74,7 @@ public class MatchPlayerDetailActivity extends AppCompatActivity {
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            //navigateUpTo(new Intent(this, MatchDetailActivity.class));
-            finish();
+            supportFinishAfterTransition();
             return true;
         }
         return super.onOptionsItemSelected(item);

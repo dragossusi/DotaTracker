@@ -29,7 +29,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.rachierudragos.dotatracker.MainActivity" />
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".match.detail.MatchPlayerDetailActivity"
@@ -38,17 +38,21 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.rachierudragos.dotatracker.match.MatchDetailActivity" />
+                android:value=".match.MatchDetailActivity" />
         </activity>
         <activity
-            android:name=".match.GraphActivity"
+            android:name=".match.graph.GraphActivity"
             android:label="@string/title_graphs"
             android:parentActivityName=".match.MatchDetailActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.rachierudragos.dotatracker.match.MatchDetailActivity" />
+                android:value=".match.MatchDetailActivity" />
         </activity>
-        <activity android:name=".match.ChatActivity"></activity>
+        <activity android:name=".match.chat.ChatActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".match.MatchDetailActivity" />
+        </activity>
     </application>
 
 </manifest>

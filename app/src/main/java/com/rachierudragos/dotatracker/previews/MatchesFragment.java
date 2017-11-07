@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -58,11 +59,13 @@ public class MatchesFragment extends Fragment {
                 Log.d("url", call.request().url().toString());
                 DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
                 float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
-                if(dpWidth<900)
+                if(dpWidth<900) {
                     recyclerView.setAdapter(new MatchAdapter(context, response.body()));
-                else
-                    recyclerView.setAdapter(new MatchLargeScreenAdapter(context,response.body()));
-                recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+                    recyclerView.setLayoutManager(new GridLayoutManager(context,(int)dpWidth/190));
+                }else {
+                    recyclerView.setAdapter(new MatchLargeScreenAdapter(context, response.body()));
+                    recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+                }
                 ProgressBar pb = rootView.findViewById(R.id.progressBar);
                 pb.setVisibility(View.GONE);
             }

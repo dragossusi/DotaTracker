@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginEnd="@dimen/margin_16"
+    android:layout_marginStart="@dimen/margin_16"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/margin_16"
+    android:paddingTop="@dimen/margin_16">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="@dimen/elevation_default"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            style="@style/CardView.Base"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_16">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/lvl"
+                        style="@style/TextView.Secondary"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_little"
+                        android:layout_weight="1"
+                        android:text="@string/label_level"
+                        android:textAlignment="textStart" />
+
+                    <TextView
+                        android:id="@+id/kda"
+                        style="@style/TextView.Secondary"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_little"
+                        android:layout_weight="1"
+
+                        android:text="@string/label_kda"
+                        android:textAlignment="textStart" />
+
+                    <TextView
+                        android:id="@+id/gpm"
+                        style="@style/TextView.Secondary"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_little"
+                        android:layout_weight="1"
+
+                        android:text="@string/label_gpm"
+                        android:textAlignment="textStart" />
+
+                    <TextView
+                        android:id="@+id/xpm"
+                        style="@style/TextView.Secondary"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_little"
+                        android:layout_weight="1"
+
+                        android:text="@string/label_XPM"
+                        android:textAlignment="textStart" />
+
+                    <TextView
+                        android:id="@+id/net"
+                        style="@style/TextView.Secondary"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_little"
+                        android:layout_weight="1"
+
+                        android:text="@string/label_net"
+                        android:textAlignment="textStart" />
+
+
+                    <TextView
+                        android:id="@+id/lhd"
+                        style="@style/TextView.Secondary"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_little"
+                        android:layout_weight="1"
+
+                        android:text="@string/label_lhd"
+                        android:textAlignment="textStart" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/lvl_detail"
+                        style="@style/TextView.Secondary"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_little"
+                        android:layout_weight="1"
+
+
+                        android:text="Val" />
+
+                    <TextView
+                        android:id="@+id/kda_detail"
+                        style="@style/TextView.Secondary"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_little"
+                        android:layout_weight="1"
+
+
+                        android:text="Val" />
+
+                    <TextView
+                        android:id="@+id/gpm_detail"
+                        style="@style/TextView.Secondary"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_little"
+                        android:layout_weight="1"
+
+
+                        android:text="Val" />
+
+                    <TextView
+                        android:id="@+id/xpm_detail"
+                        style="@style/TextView.Secondary"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_little"
+                        android:layout_weight="1"
+
+
+                        android:text="Val" />
+
+                    <TextView
+                        android:id="@+id/net_detail"
+                        style="@style/TextView.Secondary"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_little"
+                        android:layout_weight="1"
+
+
+                        android:text="Val" />
+
+                    <TextView
+                        android:id="@+id/lhd_detail"
+                        style="@style/TextView.Secondary"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_little"
+                        android:layout_weight="1"
+
+
+                        android:text="Val" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <include layout="@layout/layout_items" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_16"/>
+
+    </LinearLayout>
+    <!--nu pune aici-->
+</android.support.v4.widget.NestedScrollView>

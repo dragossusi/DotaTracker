@@ -6,6 +6,11 @@
     android:name="com.rachierudragos.dotatracker.MatchListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginEnd="@dimen/margin_16"
+    android:layout_marginStart="@dimen/margin_16"
+    android:paddingTop="@dimen/padding_overlap"
+    android:paddingBottom="@dimen/padding_overlap"
+    android:clipToPadding="false"
     app:layoutManager="LinearLayoutManager"
     tools:context="com.rachierudragos.dotatracker.match.MatchDetailActivity"
     tools:listitem="@layout/item_match_hero" />

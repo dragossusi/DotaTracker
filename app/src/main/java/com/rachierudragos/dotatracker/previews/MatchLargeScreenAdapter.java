@@ -12,6 +12,7 @@ import com.rachierudragos.dotatracker.Wrapper.database.Lobbies;
 import com.rachierudragos.dotatracker.Wrapper.match.MatchPreview;
 import com.rachierudragos.dotatracker.vars.Utils;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,7 +34,10 @@ public class MatchLargeScreenAdapter extends MatchAdapter {
     public void onBindViewHolder(ItemHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         ItemHolderLarge holderLarge = (ItemHolderLarge) holder;
-        holderLarge.textSkill.setText(Lobbies.getLobby(matches.get(position).lobby_type));
+        MatchPreview matchPreview = matches.get(position);
+        holderLarge.textSkill.setText(Lobbies.getLobby(matchPreview.lobby_type));
+        holderLarge.textWhen.setText(Utils.DATE_FORMAT.format("dd MMM",new Date(matchPreview.start_time*1000)));
+        holderLarge.textLane.setText(matchPreview.isRadiant()?context.getString(R.string.radiant):context.getString(R.string.dire));
     }
 
     @Override

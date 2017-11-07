@@ -71,8 +71,8 @@ public class MatchHeroAdapter extends RecyclerView.Adapter<MatchHeroAdapter.Item
                     arguments.putInt("player", position);
                     MatchDetailFragment fragment = new MatchDetailFragment();
                     fragment.setArguments(arguments);
-                    fragment.setEnterTransition(new Slide(Gravity.BOTTOM));
-                    fragment.setExitTransition(new Slide(Gravity.RIGHT));
+                    fragment.setEnterTransition(new Slide(Gravity.LEFT));
+                    fragment.setExitTransition(new Slide(Gravity.BOTTOM));
                     ((AppCompatActivity) context).getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.match_detail_container, fragment,"heroDetail")

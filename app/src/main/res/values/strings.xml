@@ -22,4 +22,12 @@
 
     <string name="format_KDA">%d/%d/%d</string>
     <string name="format_LHDN">%d/%d</string>
+    <string name="label_net">Net</string>
+    <string name="label_level">Level</string>
+    <string name="label_kda">K/D/A</string>
+    <string name="label_gpm">GPM</string>
+    <string name="label_XPM">XPM</string>
+    <string name="label_lhd">L/D</string>
+    <string name="dire">Dire</string>
+    <string name="radiant">Radiant</string>
 </resources>

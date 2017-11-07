@@ -19,6 +19,9 @@
     <color name="green">#69b970</color>
     <color name="red">#fd4d51</color>
     <color name="gray">#b2b2b2</color>
+    <color name="yellow">#ffd163</color>
+    <color name="blue">#abc9eb</color>
+
 
     <color name="pressed_color">#44000000</color>
     <color name="selected_color">#33000000</color>

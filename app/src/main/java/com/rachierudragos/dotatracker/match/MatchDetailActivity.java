@@ -3,7 +3,7 @@ package com.rachierudragos.dotatracker.match;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,14 +12,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.rachierudragos.dotatracker.Wrapper.parcel.ChatListParcel;
+import com.rachierudragos.dotatracker.Wrapper.parcel.IntegerListParcel;
+import com.rachierudragos.dotatracker.match.chat.ChatActivity;
+import com.rachierudragos.dotatracker.match.graph.GraphActivity;
 import com.rachierudragos.dotatracker.vars.App;
 import com.rachierudragos.dotatracker.Wrapper.ODotaAPI2;
 import com.rachierudragos.dotatracker.adapter.MatchHeroAdapter;
 import com.rachierudragos.dotatracker.R;
 import com.rachierudragos.dotatracker.Wrapper.match.MatchDetail;
 import com.rachierudragos.dotatracker.match.detail.MatchPlayerDetailActivity;
-
-import java.io.Serializable;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -107,14 +109,14 @@ public class MatchDetailActivity extends AppCompatActivity {
 
         if (id == R.id.action_graphs) {
             Intent intent = new Intent(this, GraphActivity.class);
-            intent.putExtra("gpm", (Serializable) matchDetail.radiant_gold_adv);
-            intent.putExtra("xpm", (Serializable) matchDetail.radiant_xp_adv);
+            intent.putExtra("xpm", new IntegerListParcel(matchDetail.radiant_xp_adv));
+            intent.putExtra("gpm", new IntegerListParcel(matchDetail.radiant_gold_adv));
             context.startActivity(intent);
             return true;
         }
         if (id == R.id.action_chat) {
             Intent intent = new Intent(this, ChatActivity.class);
-            intent.putExtra("chat", (Serializable) matchDetail.chat);
+            intent.putExtra("chat", new ChatListParcel(matchDetail.chat));
             context.startActivity(intent);
             return true;
         }

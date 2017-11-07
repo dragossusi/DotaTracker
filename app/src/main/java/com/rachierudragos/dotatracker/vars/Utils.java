@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.text.format.DateFormat;
 
 import com.rachierudragos.dotatracker.Wrapper.database.HeroDatabase;
 import com.rachierudragos.dotatracker.Wrapper.hero.HeroDetail;
@@ -17,6 +18,7 @@ import java.text.DecimalFormat;
 public class Utils {
     public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00");
     public static final String API_HOST = "https://api.opendota.com/api/";
+    public static final DateFormat DATE_FORMAT = new DateFormat();
     private static final String ID = "id";
     private static final String MATCHES = "matches";
     private static SharedPreferences preferences;

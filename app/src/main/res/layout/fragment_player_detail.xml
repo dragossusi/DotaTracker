@@ -10,9 +10,9 @@
     android:paddingTop="@dimen/margin_16">
 
     <LinearLayout
-        android:background="@color/cardView.Light"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/cardView.Light"
         android:elevation="@dimen/elevation_default"
         android:orientation="vertical"
         android:outlineProvider="bounds">
@@ -29,7 +29,7 @@
 
                 <TextView
                     android:id="@+id/lvl"
-                    style="?android:attr/textAppearanceLarge"
+                    style="@style/TextView.Primary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
@@ -38,7 +38,7 @@
 
                 <TextView
                     android:id="@+id/kda"
-                    style="?android:attr/textAppearanceLarge"
+                    style="@style/TextView.Primary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
@@ -46,8 +46,17 @@
                     android:textAlignment="textStart" />
 
                 <TextView
+                    android:id="@+id/gpm"
+                    style="@style/TextView.Primary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="Gpm"
+                    android:textAlignment="textStart" />
+
+                <TextView
                     android:id="@+id/xpm"
-                    style="?android:attr/textAppearanceLarge"
+                    style="@style/TextView.Primary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
@@ -56,7 +65,7 @@
 
                 <TextView
                     android:id="@+id/net"
-                    style="?android:attr/textAppearanceLarge"
+                    style="@style/TextView.Primary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -65,18 +74,10 @@
                     android:text="Networth"
                     android:textAlignment="textStart" />
 
-                <TextView
-                    android:id="@+id/gpm"
-                    style="?android:attr/textAppearanceLarge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:text="Gpm"
-                    android:textAlignment="textStart" />
 
                 <TextView
                     android:id="@+id/lhd"
-                    style="?android:attr/textAppearanceLarge"
+                    style="@style/TextView.Primary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
@@ -91,7 +92,7 @@
 
                 <TextView
                     android:id="@+id/lvl_detail"
-                    style="?android:attr/textAppearanceLarge"
+                    style="@style/TextView.Primary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
@@ -100,7 +101,7 @@
 
                 <TextView
                     android:id="@+id/kda_detail"
-                    style="?android:attr/textAppearanceLarge"
+                    style="@style/TextView.Primary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
@@ -109,7 +110,7 @@
 
                 <TextView
                     android:id="@+id/gpm_detail"
-                    style="?android:attr/textAppearanceLarge"
+                    style="@style/TextView.Primary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
@@ -118,7 +119,7 @@
 
                 <TextView
                     android:id="@+id/xpm_detail"
-                    style="?android:attr/textAppearanceLarge"
+                    style="@style/TextView.Primary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
@@ -127,7 +128,7 @@
 
                 <TextView
                     android:id="@+id/net_detail"
-                    style="?android:attr/textAppearanceLarge"
+                    style="@style/TextView.Primary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
@@ -136,7 +137,7 @@
 
                 <TextView
                     android:id="@+id/lhd_detail"
-                    style="?android:attr/textAppearanceLarge"
+                    style="@style/TextView.Primary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
