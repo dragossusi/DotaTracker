@@ -79,6 +79,7 @@ public class GraphActivity extends AppCompatActivity {
         lineData = new LineData(dataSetGpm, dataSetXpm);
         lineData.setDrawValues(false);
         graph.setData(lineData);
+
         XAxis xAxis = graph.getXAxis();
         xAxis.setGranularity(1f);
         xAxis.setTextColor(Color.WHITE);
@@ -95,7 +96,7 @@ public class GraphActivity extends AppCompatActivity {
         graph.getAxisRight().setEnabled(false);
         graph.getLegend().setEnabled(false);
         graph.setDrawMarkers(true);
-        graph.getViewPortHandler().setMinMaxScaleX(1, 10);
+        graph.getViewPortHandler().setMinimumScaleX(1.5f);
 
         graph.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override

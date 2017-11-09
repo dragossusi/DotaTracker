@@ -34,6 +34,7 @@ public class MatchPlayer implements Parcelable {
     public int hero_healing;
     public int hero_id;
 
+
     public int item_0;
     public int item_1;
     public int item_2;
@@ -102,6 +103,12 @@ public class MatchPlayer implements Parcelable {
         lane_efficiency_pct = in.readInt();
         lane = in.readInt();
         lane_role = in.readInt();
+        gold_t = new ArrayList<>();
+        xp_t = new ArrayList<>();
+        ability_upgrades_arr = new ArrayList<>();
+        in.readList(gold_t,null);
+        in.readList(xp_t,null);
+        in.readList(ability_upgrades_arr,null);
     }
 
     public static final Creator<MatchPlayer> CREATOR = new Creator<MatchPlayer>() {
@@ -175,6 +182,9 @@ public class MatchPlayer implements Parcelable {
     public int lane_efficiency_pct;
     public int lane;
     public int lane_role;
+    public List<Integer> gold_t;
+    public List<Integer> xp_t;
+    public List<Integer> ability_upgrades_arr;
 
     @Override
     public int describeContents() {
@@ -243,5 +253,8 @@ public class MatchPlayer implements Parcelable {
         parcel.writeInt(lane_efficiency_pct);
         parcel.writeInt(lane);
         parcel.writeInt(lane_role);
+        parcel.writeList(gold_t);
+        parcel.writeList(xp_t);
+        parcel.writeList(ability_upgrades_arr);
     }
 }

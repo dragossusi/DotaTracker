@@ -37,7 +37,6 @@ import retrofit2.Response;
  */
 public class MatchDetailActivity extends AppCompatActivity {
     private MatchDetail matchDetail;
-    private Context context;
     private long match_id;
 
     RecyclerView recyclerView;
@@ -58,7 +57,6 @@ public class MatchDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         toolbar.setTitle(getTitle());
-        context = this;
         Intent intentAnt = getIntent();
         match_id = intentAnt.getLongExtra("match_id", 0);
         if (matchDetail == null) {
@@ -111,13 +109,13 @@ public class MatchDetailActivity extends AppCompatActivity {
             Intent intent = new Intent(this, GraphActivity.class);
             intent.putExtra("xpm", new IntegerListParcel(matchDetail.radiant_xp_adv));
             intent.putExtra("gpm", new IntegerListParcel(matchDetail.radiant_gold_adv));
-            context.startActivity(intent);
+            this.startActivity(intent);
             return true;
         }
         if (id == R.id.action_chat) {
             Intent intent = new Intent(this, ChatActivity.class);
             intent.putExtra("chat", new ChatListParcel(matchDetail.chat));
-            context.startActivity(intent);
+            this.startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

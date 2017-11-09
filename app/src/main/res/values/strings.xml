@@ -13,6 +13,7 @@
     <string name="action_graph_gpm">GPM Graph</string>
     <string name="action_graph_xpm">XPM Graph</string>
 
+    <string name="ability_level_up">Level %d</string>
 
     <string name="title_match_list">Players</string>
     <string name="title_match_detail">Player Detail</string>
@@ -30,4 +31,5 @@
     <string name="label_lhd">L/D</string>
     <string name="dire">Dire</string>
     <string name="radiant">Radiant</string>
+    <string name="ability_ids">ability_ids.json</string>
 </resources>

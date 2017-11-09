@@ -2,6 +2,8 @@
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginEnd="@dimen/margin_16"
     android:layout_marginStart="@dimen/margin_16"
     android:clipToPadding="false"
@@ -249,5 +251,18 @@
                     android:src="@drawable/empty" />
             </LinearLayout>
         </LinearLayout>
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart_player_detail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/graph_height"
+            android:layout_marginTop="@dimen/margin_16" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_abilities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_hero_ability"/>
     </LinearLayout>
+    <!--nici aici-->
 </android.support.v4.widget.NestedScrollView>

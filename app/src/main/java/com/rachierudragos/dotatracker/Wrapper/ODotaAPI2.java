@@ -35,4 +35,5 @@ public interface ODotaAPI2 {
 
     @GET("matches/{matchid}")
     Call<MatchDetail> getMatch(@Path("matchid") long match_id);
+
 }

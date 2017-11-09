@@ -10,6 +10,9 @@
         android:id="@+id/recycler_items"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:padding="@dimen/item_offset"
+        app:layoutManager="android.support.v7.widget.GridLayoutManager"
         tools:listitem="@layout/item_match_preview"/>
 
     <ProgressBar
